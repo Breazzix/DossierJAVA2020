@@ -32,6 +32,9 @@ private java.awt.Frame parent;
          if (h.containsKey(key) && h.containsValue(pswd))
          {
              System.out.println("OK");
+             WinHarbour w = new WinHarbour();
+             w.setLoggedIn(true);
+             this.dispose();
          }
          else
          {
