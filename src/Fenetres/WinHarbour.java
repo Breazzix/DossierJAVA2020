@@ -13,7 +13,7 @@ import java.awt.Component;
  */
 public class WinHarbour extends javax.swing.JFrame {
 
-    private static boolean loggedIn;
+    private static boolean loggedIn = false;
 
     /**
      * @return the loggedIn
@@ -40,7 +40,6 @@ public class WinHarbour extends javax.swing.JFrame {
 
 
     private void atStartUp() {
-        mItmLogout.getComponent().setEnabled(false);
         mainPanelSetEnabled(false);
     }
 
@@ -49,6 +48,15 @@ public class WinHarbour extends javax.swing.JFrame {
 
         for (Component c : com) {
             c.setEnabled(val);
+        }
+
+        if (val) {
+            mItmLogin.getComponent().setEnabled(false);
+            mItmLogout.getComponent().setEnabled(true);
+        }
+        else {
+            mItmLogin.getComponent().setEnabled(true);
+            mItmLogout.getComponent().setEnabled(false);
         }
     }
 
@@ -215,9 +223,19 @@ public class WinHarbour extends javax.swing.JFrame {
         menuUtilisateur.add(mItmLogin);
 
         mItmLogout.setText("Logout");
+        mItmLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItmLogoutActionPerformed(evt);
+            }
+        });
         menuUtilisateur.add(mItmLogout);
 
         mItmNouveau.setText("Nouveau");
+        mItmNouveau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItmNouveauActionPerformed(evt);
+            }
+        });
         menuUtilisateur.add(mItmNouveau);
 
         mainMenuBar.add(menuUtilisateur);
@@ -259,16 +277,32 @@ public class WinHarbour extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+
     private void mItmLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmLoginActionPerformed
-        Login login = new Login(this, true);
+        Login login = new Login(this, true, false);
         login.setVisible(true);
 
-        System.out.println(isLoggedIn());
         if (isLoggedIn()) {
-            System.out.println("c bon");
             mainPanelSetEnabled(true);
         }
     }//GEN-LAST:event_mItmLoginActionPerformed
+
+    private void mItmLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmLogoutActionPerformed
+        setLoggedIn(false);
+        mainPanelSetEnabled(false);
+    }//GEN-LAST:event_mItmLogoutActionPerformed
+
+    private void mItmNouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmNouveauActionPerformed
+        Login login = new Login(this, true, true);
+        login.setVisible(true);
+        
+        if (isLoggedIn()) {
+            mainPanelSetEnabled(true);
+        }
+    }//GEN-LAST:event_mItmNouveauActionPerformed
+
+
 
     /**
      * @param args the command line arguments

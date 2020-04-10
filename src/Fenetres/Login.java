@@ -16,12 +16,21 @@ public class Login extends javax.swing.JDialog {
 static Hashtable<String, String> h;
 private java.awt.Frame parent;
 
+private boolean inscrire;
+
     /**
      * Creates new form Login
      */
-    public Login(java.awt.Frame parent, boolean modal) {
+    public Login(java.awt.Frame parent, boolean modal, boolean inscription) {
         super(parent, modal);
         initComponents();
+
+        setInscrire(inscription);
+        if (inscription)
+            this.setTitle("Inscription");
+        else 
+           this.setTitle("Login");
+           
         h = new Hashtable<String, String>();
         h.put("admin", "123"); 
         
@@ -29,17 +38,24 @@ private java.awt.Frame parent;
     
      public void VerifFields(String key, String pswd) throws BaseException
      {
-         if (h.containsKey(key) && h.containsValue(pswd))
-         {
-             System.out.println("OK");
-             WinHarbour w = new WinHarbour();
-             w.setLoggedIn(true);
-             this.dispose();
+         if (isInscrire()) {
+            if (key.isEmpty() || pswd.isEmpty())
+                throw new BaseException(this.parent, "Erreur de l'inscription !!!");
+            else {
+                h.put(key, pswd);
+                WinHarbour.setLoggedIn(true);
+                this.dispose();
+            }
          }
-         else
-         {
-             throw new BaseException(this.parent, "Erreur de login !!!");
+         else {
+            if (h.containsKey(key) && h.containsValue(pswd)) {
+                WinHarbour.setLoggedIn(true);
+                 this.dispose();
+             }
+             else
+                 throw new BaseException(this.parent, "Erreur de login !!!");
          }
+         
      }
 
     /**
@@ -187,7 +203,7 @@ private java.awt.Frame parent;
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login dialog = new Login(new javax.swing.JFrame(), true);
+                Login dialog = new Login(new javax.swing.JFrame(), true, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -208,4 +224,18 @@ private java.awt.Frame parent;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldUserName;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the inscrire
+     */
+    public boolean isInscrire() {
+        return inscrire;
+    }
+
+    /**
+     * @param inscrire the inscrire to set
+     */
+    public void setInscrire(boolean inscrire) {
+        this.inscrire = inscrire;
+    }
 }
