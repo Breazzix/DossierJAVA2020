@@ -6,6 +6,10 @@
 package Fenetres;
 
 import java.awt.Component;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -14,10 +18,24 @@ import java.awt.Component;
 public class WinHarbour extends javax.swing.JFrame {
 
     private static boolean loggedIn = false;
+    private static String formDate = "dd/MM/yyyy";
+    private static String formTime = "HH mm";
+    private static String formPays = "France";
 
     /**
      * @return the loggedIn
      */
+   
+
+    /**
+     * Creates new form WinHarbour
+     */
+    public WinHarbour() {
+        initComponents();
+        setTitle("Capitainerie d'Inpres-Harbour");
+        atStartUp();
+    }
+    
     public static boolean isLoggedIn() {
         return loggedIn;
     }
@@ -29,18 +47,20 @@ public class WinHarbour extends javax.swing.JFrame {
         loggedIn = aLoggedIn;
     }
 
-    /**
-     * Creates new form WinHarbour
-     */
-    public WinHarbour() {
-        initComponents();
-
-        atStartUp();
-    }
-
-
     private void atStartUp() {
         mainPanelSetEnabled(false);
+    }
+    
+    public static void setPays(String pays) {
+        formPays = pays;
+    }
+    
+    public static void setDate(String date) {
+        formDate = date;
+    }
+    
+    public static void setTime(String time) {
+        formTime = time;
     }
 
     private void mainPanelSetEnabled(boolean val) {
@@ -53,11 +73,167 @@ public class WinHarbour extends javax.swing.JFrame {
         if (val) {
             mItmLogin.getComponent().setEnabled(false);
             mItmLogout.getComponent().setEnabled(true);
+            AffichageDate();
         }
         else {
             mItmLogin.getComponent().setEnabled(true);
             mItmLogout.getComponent().setEnabled(false);
         }
+        
+    }
+    
+   
+    public static void AffichageDate()
+    {
+        Thread t_date = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                while(true)
+                {
+                    String datecur = getCurrentDate();
+                    jLabel_DATE.setText(datecur);
+                    try
+                    {
+                        sleep(1000);
+                    }
+                    catch(InterruptedException ex)
+                    {
+                        ex.getMessage();
+                    }
+                }
+            }
+        };
+        t_date.start();
+    }
+
+    public static String getCurrentDate()
+    {
+        Date cur_date = new Date();
+        String madate = new String();
+        
+        String form = formDate + " " + formTime;
+        
+        
+        if(form.equals("dd/MM/yyyy HH mm"))
+        {
+            if(formPays.equals("France"))      
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.UK).format(cur_date);
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.GERMANY).format(cur_date);  
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US).format(cur_date);
+        }
+        if(form.equals("dd/MM/yyyy HH mm ss"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.UK).format(cur_date); 
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.US).format(cur_date);
+        }
+        if(form.equals("dd/MM/yyyy HH mm TimeZone"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.UK).format(cur_date);
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.US).format(cur_date);
+        }
+        if(form.equals("dd month year HH mm"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.UK).format(cur_date); 
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.US).format(cur_date);
+        }
+        if(form.equals("dd month year HH mm ss"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.UK).format(cur_date);
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.US).format(cur_date);
+        }
+        if(form.equals("dd month year HH mm TimeZone"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.UK).format(cur_date);
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.US).format(cur_date);
+        }
+        if(form.equals("weekday dd month year HH mm"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.UK).format(cur_date); 
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.US).format(cur_date);
+        }
+        if(form.equals("weekday dd month year HH mm ss"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.UK).format(cur_date); 
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.US).format(cur_date);
+        }
+        if(form.equals("weekday dd month year HH mm TimeZone"))
+        {
+            if(formPays.equals("France"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.FRANCE).format(cur_date);
+            if(formPays.equals("Royaume Uni"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.UK).format(cur_date); 
+            if(formPays.equals("Allemagne"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.GERMANY).format(cur_date);
+            if(formPays.equals("Italie"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.ITALY).format(cur_date);
+            if(formPays.equals("USA"))
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.US).format(cur_date);
+        }
+        return madate;
     }
 
     /**
@@ -86,6 +262,8 @@ public class WinHarbour extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnBateauAmarre = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel_DATE = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         menuUtilisateur = new javax.swing.JMenu();
         mItmLogin = new javax.swing.JMenuItem();
@@ -95,7 +273,12 @@ public class WinHarbour extends javax.swing.JFrame {
         menuBateaux = new javax.swing.JMenu();
         menuPersonnel = new javax.swing.JMenu();
         menuParametre = new javax.swing.JMenu();
+        mItmDateFormat = new javax.swing.JMenuItem();
+        mItmLogFile = new javax.swing.JMenuItem();
+        mItmCbDate = new javax.swing.JCheckBoxMenuItem();
         menuApropos = new javax.swing.JMenu();
+        mItmAuteur = new javax.swing.JMenuItem();
+        mItmAide = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +317,10 @@ public class WinHarbour extends javax.swing.JFrame {
 
         jButton1.setText("Arrêter le serveur");
 
+        jLabel4.setText("Nous sommes le :");
+
+        jLabel_DATE.setText("date du jour");
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -167,8 +354,13 @@ public class WinHarbour extends javax.swing.JFrame {
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(27, 27, 27)
                                         .addComponent(btnEnvoyerConfirm)
-                                        .addGap(0, 110, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane1))))
+                                        .addGap(0, 130, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel_DATE, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -185,7 +377,10 @@ public class WinHarbour extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnServeur)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnServeur)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel_DATE))
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox1)
@@ -209,7 +404,7 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addComponent(btnBateauAmarre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         menuUtilisateur.setText("Utilisateur");
@@ -250,9 +445,42 @@ public class WinHarbour extends javax.swing.JFrame {
         mainMenuBar.add(menuPersonnel);
 
         menuParametre.setText("Parametre");
+
+        mItmDateFormat.setText("Format date");
+        mItmDateFormat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItmDateFormatActionPerformed(evt);
+            }
+        });
+        menuParametre.add(mItmDateFormat);
+
+        mItmLogFile.setText("Fichier log");
+        menuParametre.add(mItmLogFile);
+
+        mItmCbDate.setSelected(true);
+        mItmCbDate.setText("Affichage date-heure courante");
+        menuParametre.add(mItmCbDate);
+
         mainMenuBar.add(menuParametre);
 
         menuApropos.setText("A propos");
+
+        mItmAuteur.setText("Auteurs");
+        mItmAuteur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItmAuteurActionPerformed(evt);
+            }
+        });
+        menuApropos.add(mItmAuteur);
+
+        mItmAide.setText("Aide");
+        mItmAide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItmAideActionPerformed(evt);
+            }
+        });
+        menuApropos.add(mItmAide);
+
         mainMenuBar.add(menuApropos);
 
         setJMenuBar(mainMenuBar);
@@ -261,17 +489,11 @@ public class WinHarbour extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -301,6 +523,21 @@ public class WinHarbour extends javax.swing.JFrame {
             mainPanelSetEnabled(true);
         }
     }//GEN-LAST:event_mItmNouveauActionPerformed
+
+    private void mItmAuteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmAuteurActionPerformed
+       Auteurs auteurs = new Auteurs(this, rootPaneCheckingEnabled);
+       auteurs.setVisible(true);
+    }//GEN-LAST:event_mItmAuteurActionPerformed
+
+    private void mItmAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmAideActionPerformed
+         Help aide = new Help(this, rootPaneCheckingEnabled);
+         aide.setVisible(true);
+    }//GEN-LAST:event_mItmAideActionPerformed
+
+    private void mItmDateFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmDateFormatActionPerformed
+        DateParam dateparam = new DateParam(this, rootPaneCheckingEnabled, formPays, formDate, formTime);
+        dateparam.setVisible(true);
+    }//GEN-LAST:event_mItmDateFormatActionPerformed
 
 
 
@@ -351,11 +588,18 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private static javax.swing.JLabel jLabel_DATE;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JList listBatEntree;
+    private javax.swing.JMenuItem mItmAide;
+    private javax.swing.JMenuItem mItmAuteur;
+    private javax.swing.JCheckBoxMenuItem mItmCbDate;
+    private javax.swing.JMenuItem mItmDateFormat;
+    private javax.swing.JMenuItem mItmLogFile;
     private javax.swing.JMenuItem mItmLogin;
     private javax.swing.JMenuItem mItmLogout;
     private javax.swing.JMenuItem mItmNouveau;
