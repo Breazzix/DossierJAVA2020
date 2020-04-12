@@ -18,9 +18,7 @@ import java.util.StringTokenizer;
 public class WinHarbour extends javax.swing.JFrame {
 
     private static boolean loggedIn = false;
-    // private static String formDate = "dd/MM/yyyy";
-    // private static String formTime = "HH mm";
-    // private static String formPays = "France";
+   
 
     private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
     private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
@@ -57,17 +55,6 @@ public class WinHarbour extends javax.swing.JFrame {
         AffichageDate();
     }
     
-    // public static void setPays(String pays) {
-    //     formPays = pays;
-    // }
-    
-    // public static void setDate(String date) {
-    //     formDate = date;
-    // }
-    
-    // public static void setTime(String time) {
-    //     formTime = time;
-    // }
 
     private void mainPanelSetEnabled(boolean val) {
         Component[] com = mainPanel.getComponents();
@@ -118,132 +105,13 @@ public class WinHarbour extends javax.swing.JFrame {
         Date cur_date = new Date();
         String madate = new String();
         
-        // String form = formDate + " " + formTime;
 
         madate = DateFormat.getDateTimeInstance(
             dateFormat[DateParam.selectedDateFormat],
             timeFormat[DateParam.selectedTimeFormat],
             contries[DateParam.selectedCountry]).format(cur_date);
         
-        /*
-        if(form.equals("dd/MM/yyyy HH mm"))
-        {
-            if(formPays.equals("France"))      
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.UK).format(cur_date);
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.GERMANY).format(cur_date);  
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US).format(cur_date);
-        }
-        if(form.equals("dd/MM/yyyy HH mm ss"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.UK).format(cur_date); 
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.US).format(cur_date);
-        }
-        if(form.equals("dd/MM/yyyy HH mm TimeZone"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.UK).format(cur_date);
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.FULL, Locale.US).format(cur_date);
-        }
-        if(form.equals("dd month year HH mm"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.UK).format(cur_date); 
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.US).format(cur_date);
-        }
-        if(form.equals("dd month year HH mm ss"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.UK).format(cur_date);
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, Locale.US).format(cur_date);
-        }
-        if(form.equals("dd month year HH mm TimeZone"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.UK).format(cur_date);
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.FULL, Locale.US).format(cur_date);
-        }
-        if(form.equals("weekday dd month year HH mm"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.UK).format(cur_date); 
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, Locale.US).format(cur_date);
-        }
-        if(form.equals("weekday dd month year HH mm ss"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.UK).format(cur_date);
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.US).format(cur_date);
-        }
-        if(form.equals("weekday dd month year HH mm TimeZone"))
-        {
-            if(formPays.equals("France"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.FRANCE).format(cur_date);
-            if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.UK).format(cur_date); 
-            if(formPays.equals("Allemagne"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.GERMANY).format(cur_date);
-            if(formPays.equals("Italie"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.ITALY).format(cur_date);
-            if(formPays.equals("USA"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.US).format(cur_date);
-        }
-        */
+        
         return madate;
     }
     
@@ -583,18 +451,11 @@ public class WinHarbour extends javax.swing.JFrame {
         if (mItmCbDate.isSelected() == true)
         {
             datePanel.setVisible(true);
-            // formDate = "dd/MM/yyyy";
-            // formTime = "HH mm";
-            // formPays = "France";
             AffichageDate();
         }
         else
         {
             datePanel.setVisible(false);
-            // formDate = "";
-            // formTime = "";
-            // formPays = "";
-            // AffichageDate();
         }
     }//GEN-LAST:event_mItmCbDateActionPerformed
 
