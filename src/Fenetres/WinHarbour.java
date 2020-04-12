@@ -33,6 +33,7 @@ public class WinHarbour extends javax.swing.JFrame {
     public WinHarbour() {
         initComponents();
         setTitle("Capitainerie d'Inpres-Harbour");
+        AffichageDate();
         atStartUp();
     }
     
@@ -73,7 +74,6 @@ public class WinHarbour extends javax.swing.JFrame {
         if (val) {
             mItmLogin.getComponent().setEnabled(false);
             mItmLogout.getComponent().setEnabled(true);
-            AffichageDate();
         }
         else {
             mItmLogin.getComponent().setEnabled(true);
@@ -234,6 +234,11 @@ public class WinHarbour extends javax.swing.JFrame {
                 madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.US).format(cur_date);
         }
         return madate;
+    }
+    
+    public static void setmItmCbDate(boolean val)
+    {
+        mItmCbDate.setSelected(val);
     }
 
     /**
@@ -459,6 +464,11 @@ public class WinHarbour extends javax.swing.JFrame {
 
         mItmCbDate.setSelected(true);
         mItmCbDate.setText("Affichage date-heure courante");
+        mItmCbDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItmCbDateActionPerformed(evt);
+            }
+        });
         menuParametre.add(mItmCbDate);
 
         mainMenuBar.add(menuParametre);
@@ -539,6 +549,23 @@ public class WinHarbour extends javax.swing.JFrame {
         dateparam.setVisible(true);
     }//GEN-LAST:event_mItmDateFormatActionPerformed
 
+    private void mItmCbDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmCbDateActionPerformed
+        if (mItmCbDate.isSelected() == true)
+        {
+            formDate = "dd/MM/yyyy";
+            formTime = "HH mm";
+            formPays = "France";
+            AffichageDate();
+        }
+        else
+        {
+            formDate = "";
+            formTime = "";
+            formPays = "";
+            AffichageDate();
+        }
+    }//GEN-LAST:event_mItmCbDateActionPerformed
+
 
 
     /**
@@ -597,7 +624,7 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JList listBatEntree;
     private javax.swing.JMenuItem mItmAide;
     private javax.swing.JMenuItem mItmAuteur;
-    private javax.swing.JCheckBoxMenuItem mItmCbDate;
+    private static javax.swing.JCheckBoxMenuItem mItmCbDate;
     private javax.swing.JMenuItem mItmDateFormat;
     private javax.swing.JMenuItem mItmLogFile;
     private javax.swing.JMenuItem mItmLogin;

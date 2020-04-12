@@ -123,6 +123,7 @@ public class DateParam extends javax.swing.JDialog {
         WinHarbour.setDate(jComboFormatDate.getSelectedItem().toString());
         WinHarbour.setTime(jComboFormatTemps.getSelectedItem().toString());
         WinHarbour.setPays(jComboPays.getSelectedItem().toString());
+        WinHarbour.setmItmCbDate(true);
         WinHarbour.AffichageDate();
         this.dispose();
     }//GEN-LAST:event_jButtonApplicActionPerformed
