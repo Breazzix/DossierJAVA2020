@@ -5,11 +5,19 @@
  */
 package Fenetres;
 
+import java.util.Hashtable;
+import java.util.Locale;
+
 /**
  *
  * @author vange
  */
 public class DateParam extends javax.swing.JDialog {
+
+    
+    public static int selectedCountry = 0;
+    public static int selectedDateFormat = 0;
+    public static int selectedTimeFormat = 0;
 
     /**
      * Creates new form DateParam
@@ -19,14 +27,14 @@ public class DateParam extends javax.swing.JDialog {
      * @param date
      * @param time
      */
-    public DateParam(java.awt.Frame parent, boolean modal, String pays, String date, String time) {
+    public DateParam(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Paramètre de la date");
         setLocationRelativeTo(parent);
         initComponents();
-        jComboPays.setSelectedItem(pays);
-        jComboFormatDate.setSelectedItem(date);
-        jComboFormatTemps.setSelectedItem(time);
+        jComboPays.setSelectedIndex(selectedCountry);
+        jComboFormatDate.setSelectedIndex(selectedDateFormat);
+        jComboFormatTemps.setSelectedIndex(selectedTimeFormat);
     }
 
     /**
@@ -119,10 +127,18 @@ public class DateParam extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonApplicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApplicActionPerformed
-        // TODO add your handling code here:
-        WinHarbour.setDate(jComboFormatDate.getSelectedItem().toString());
-        WinHarbour.setTime(jComboFormatTemps.getSelectedItem().toString());
-        WinHarbour.setPays(jComboPays.getSelectedItem().toString());
+
+        // retourn index , recuperer dans WinHarbour ou il y a une liste 
+
+        // System.out.println(contries[jComboPays.getSelectedIndex()]);
+
+        selectedCountry = jComboPays.getSelectedIndex();
+        selectedDateFormat = jComboFormatDate.getSelectedIndex();
+        selectedTimeFormat = jComboFormatTemps.getSelectedIndex();
+
+        // WinHarbour.setDate(jComboFormatDate.getSelectedItem().toString());
+        // WinHarbour.setTime(jComboFormatTemps.getSelectedItem().toString());
+        // WinHarbour.setPays(jComboPays.getSelectedItem().toString());
         WinHarbour.setmItmCbDate(true);
         WinHarbour.AffichageDate();
         this.dispose();
@@ -158,7 +174,7 @@ public class DateParam extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DateParam dialog = new DateParam(new javax.swing.JFrame(), true, null, null, null);
+                DateParam dialog = new DateParam(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -18,9 +18,13 @@ import java.util.StringTokenizer;
 public class WinHarbour extends javax.swing.JFrame {
 
     private static boolean loggedIn = false;
-    private static String formDate = "dd/MM/yyyy";
-    private static String formTime = "HH mm";
-    private static String formPays = "France";
+    // private static String formDate = "dd/MM/yyyy";
+    // private static String formTime = "HH mm";
+    // private static String formPays = "France";
+
+    private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
+    private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
+    private final static int[] timeFormat = {DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.FULL};
 
     /**
      * @return the loggedIn
@@ -32,8 +36,7 @@ public class WinHarbour extends javax.swing.JFrame {
      */
     public WinHarbour() {
         initComponents();
-        setTitle("Capitainerie d'Inpres-Harbour");
-        AffichageDate();
+        
         atStartUp();
     }
     
@@ -49,20 +52,22 @@ public class WinHarbour extends javax.swing.JFrame {
     }
 
     private void atStartUp() {
+        setTitle("Capitainerie d'Inpres-Harbour");
         mainPanelSetEnabled(false);
+        AffichageDate();
     }
     
-    public static void setPays(String pays) {
-        formPays = pays;
-    }
+    // public static void setPays(String pays) {
+    //     formPays = pays;
+    // }
     
-    public static void setDate(String date) {
-        formDate = date;
-    }
+    // public static void setDate(String date) {
+    //     formDate = date;
+    // }
     
-    public static void setTime(String time) {
-        formTime = time;
-    }
+    // public static void setTime(String time) {
+    //     formTime = time;
+    // }
 
     private void mainPanelSetEnabled(boolean val) {
         Component[] com = mainPanel.getComponents();
@@ -113,9 +118,14 @@ public class WinHarbour extends javax.swing.JFrame {
         Date cur_date = new Date();
         String madate = new String();
         
-        String form = formDate + " " + formTime;
+        // String form = formDate + " " + formTime;
+
+        madate = DateFormat.getDateTimeInstance(
+            dateFormat[DateParam.selectedDateFormat],
+            timeFormat[DateParam.selectedTimeFormat],
+            contries[DateParam.selectedCountry]).format(cur_date);
         
-        
+        /*
         if(form.equals("dd/MM/yyyy HH mm"))
         {
             if(formPays.equals("France"))      
@@ -212,7 +222,7 @@ public class WinHarbour extends javax.swing.JFrame {
             if(formPays.equals("France"))
                 madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.FRANCE).format(cur_date);
             if(formPays.equals("Royaume Uni"))
-                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.UK).format(cur_date); 
+                madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.UK).format(cur_date);
             if(formPays.equals("Allemagne"))
                 madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, Locale.GERMANY).format(cur_date);
             if(formPays.equals("Italie"))
@@ -233,6 +243,7 @@ public class WinHarbour extends javax.swing.JFrame {
             if(formPays.equals("USA"))
                 madate = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, Locale.US).format(cur_date);
         }
+        */
         return madate;
     }
     
@@ -267,6 +278,7 @@ public class WinHarbour extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnBateauAmarre = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        datePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel_DATE = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
@@ -293,17 +305,11 @@ public class WinHarbour extends javax.swing.JFrame {
 
         btnLire.setText("Lire");
 
-        jTextField1.setText("jTextField1");
-
         jLabel1.setText("Amarrage possible : ");
 
         btnChoisir.setText("Choisir");
 
-        jTextField2.setText("jTextField2");
-
         btnEnvoyerChoix.setText("Envoyer Choix");
-
-        jTextField3.setText("jTextField3");
 
         btnEnvoyerConfirm.setText("Envoyer confirmation");
 
@@ -319,12 +325,36 @@ public class WinHarbour extends javax.swing.JFrame {
         jLabel3.setText("Bateaux en entrée");
 
         btnBateauAmarre.setText("Bateau amarré");
+        btnBateauAmarre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBateauAmarreActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Arrêter le serveur");
 
         jLabel4.setText("Nous sommes le :");
 
         jLabel_DATE.setText("date du jour");
+
+        javax.swing.GroupLayout datePanelLayout = new javax.swing.GroupLayout(datePanel);
+        datePanel.setLayout(datePanelLayout);
+        datePanelLayout.setHorizontalGroup(
+            datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datePanelLayout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_DATE, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        datePanelLayout.setVerticalGroup(
+            datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datePanelLayout.createSequentialGroup()
+                .addGroup(datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_DATE)
+                    .addComponent(jLabel4))
+                .addGap(0, 13, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -333,6 +363,16 @@ public class WinHarbour extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel3))
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnBateauAmarre, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1)))
+                        .addGap(134, 134, 134))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
@@ -346,47 +386,37 @@ public class WinHarbour extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addGap(18, 18, 18)
                                     .addComponent(btnChoisir))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEnvoyerChoix)
-                                .addGap(26, 26, 26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(btnEnvoyerConfirm)
-                                        .addGap(0, 130, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane1)))
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnEnvoyerChoix)
+                                        .addGap(26, 26, 26)
+                                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnEnvoyerConfirm)
+                                                .addGap(0, 189, Short.MAX_VALUE))
+                                            .addComponent(jScrollPane1))))
+                                .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel_DATE, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel3))
-                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnBateauAmarre, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1)))
-                        .addGap(134, 134, 134))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(datePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24))))))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnServeur)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel_DATE))
-                .addGap(18, 18, 18)
+                    .addComponent(datePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox1)
                     .addComponent(btnLire)
@@ -401,7 +431,7 @@ public class WinHarbour extends javax.swing.JFrame {
                     .addComponent(btnEnvoyerConfirm))
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -409,7 +439,7 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addComponent(btnBateauAmarre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         menuUtilisateur.setText("Utilisateur");
@@ -545,26 +575,33 @@ public class WinHarbour extends javax.swing.JFrame {
     }//GEN-LAST:event_mItmAideActionPerformed
 
     private void mItmDateFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmDateFormatActionPerformed
-        DateParam dateparam = new DateParam(this, rootPaneCheckingEnabled, formPays, formDate, formTime);
+        DateParam dateparam = new DateParam(this, rootPaneCheckingEnabled);
         dateparam.setVisible(true);
     }//GEN-LAST:event_mItmDateFormatActionPerformed
 
     private void mItmCbDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmCbDateActionPerformed
         if (mItmCbDate.isSelected() == true)
         {
-            formDate = "dd/MM/yyyy";
-            formTime = "HH mm";
-            formPays = "France";
+            datePanel.setVisible(true);
+            // formDate = "dd/MM/yyyy";
+            // formTime = "HH mm";
+            // formPays = "France";
             AffichageDate();
         }
         else
         {
-            formDate = "";
-            formTime = "";
-            formPays = "";
-            AffichageDate();
+            datePanel.setVisible(false);
+            // formDate = "";
+            // formTime = "";
+            // formPays = "";
+            // AffichageDate();
         }
     }//GEN-LAST:event_mItmCbDateActionPerformed
+
+    private void btnBateauAmarreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBateauAmarreActionPerformed
+        WinBateauAmarre win = new WinBateauAmarre(this, true);
+        win.setVisible(true);
+    }//GEN-LAST:event_btnBateauAmarreActionPerformed
 
 
 
@@ -610,6 +647,7 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JButton btnEnvoyerConfirm;
     private javax.swing.JButton btnLire;
     private javax.swing.JButton btnServeur;
+    private javax.swing.JPanel datePanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;

@@ -13,10 +13,11 @@ import java.util.Hashtable;
  * @author vange
  */
 public class Login extends javax.swing.JDialog {
-static Hashtable<String, String> h;
-private java.awt.Frame parent;
 
-private boolean inscrire;
+    public static Hashtable<String, String> h = new Hashtable<String, String>();;
+    private java.awt.Frame parent;
+
+    private boolean inscrire;
 
     /**
      * Creates new form Login
@@ -31,8 +32,7 @@ private boolean inscrire;
         else 
            this.setTitle("Login");
            
-        h = new Hashtable<String, String>();
-        h.put("admin", "123"); 
+        //h.put("admin", "123"); 
         
     }
     
@@ -43,6 +43,8 @@ private boolean inscrire;
                 throw new BaseException(this.parent, "Erreur de l'inscription !!!");
             else {
                 h.put(key, pswd);
+                System.out.println(h);
+
                 WinHarbour.setLoggedIn(true);
                 this.dispose();
             }
