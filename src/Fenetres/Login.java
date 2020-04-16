@@ -8,6 +8,8 @@ package Fenetres;
 import Classes.BaseException;
 import java.util.Hashtable;
 
+import javax.swing.RootPaneContainer;
+
 /**
  *
  * @author vange
@@ -25,15 +27,22 @@ public class Login extends javax.swing.JDialog {
     public Login(java.awt.Frame parent, boolean modal, boolean inscription) {
         super(parent, modal);
         initComponents();
+        // this.setLocationRelativeTo(null);
+        setLocation(parent);
 
         setInscrire(inscription);
         if (inscription)
             this.setTitle("Inscription");
-        else 
-           this.setTitle("Login");
-           
-        //h.put("admin", "123"); 
-        
+        else
+            this.setTitle("Login");
+
+        // h.put("admin", "123");
+
+    }
+
+    private void setLocation(java.awt.Frame parent) {
+        int posX = parent.getLocation().x + ((RootPaneContainer) parent).getContentPane().getSize().height / 2;
+        this.setLocation(posX,  parent.getLocation().y + 100);
     }
     
      public void VerifFields(String key, String pswd) throws BaseException

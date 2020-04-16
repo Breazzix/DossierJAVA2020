@@ -5,18 +5,19 @@
  */
 package Classes;
 
-/**
- *
- * @author vange
- */
+
+
 public class Marin extends Humain implements AUnIdentifiant{
     String fonction;
+    public final static String[] listeFonction = {"Capitaine", "Second", "Bosco", "Matelot", "Passager"};
     
     public Marin()
     {
         super();
         setFonction("fct inconnue");
     }
+
+   
     
     public Marin(String name, String firstname, String birthdate, String fonct)
     {
@@ -44,5 +45,10 @@ public class Marin extends Humain implements AUnIdentifiant{
     public String getIdentifiant()
     {
         return getNom() + getPrenom() + getDateNaissance();
+    } 
+
+    @Override
+    public String toString() { 
+        return String.format(this.getFonction() + " " + this.getNom());
     } 
 }

@@ -75,7 +75,7 @@ public class Humain {
      
     public String getNom()
     {
-        return nom;
+        return this.nom;
     }
     
     public String getPrenom()

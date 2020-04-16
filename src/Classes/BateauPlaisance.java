@@ -10,6 +10,11 @@ package Classes;
  * @author vange
  */
 public class BateauPlaisance extends Bateau{
+    public BateauPlaisance(String name, String port, int tonnes, int lg, String nationalite, Equipage equip) {
+        super(name, port, tonnes, lg, nationalite, equip);
+        // TODO Auto-generated constructor stub
+    }
+
     private String typePermis;
     
     public void setTypePermis(String tp)

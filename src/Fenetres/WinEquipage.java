@@ -5,6 +5,12 @@
  */
 package Fenetres;
 
+import javax.swing.DefaultListModel;
+
+import Classes.Equipage;
+// import Classes.Marin;
+import Classes.Marin;
+
 /**
  *
  * @author ASUS7
@@ -14,9 +20,34 @@ public class WinEquipage extends javax.swing.JDialog {
     /**
      * Creates new form WinEquipage
      */
+    Equipage equip;
+
+
     public WinEquipage(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public WinEquipage(java.awt.Frame parent, boolean modal, Equipage equipage) {
+        super(parent, modal);
+        initComponents();
+
+        equip = equipage;
+        initList();
+
+        System.out.println(equip);
+    }
+
+    private void initList() {
+        DefaultListModel dlm = new DefaultListModel<>();
+        dlm.addElement(equip.getCapitaine());
+        if (equip.getSecond() != null)
+            dlm.addElement(equip.getSecond());
+        for (Marin m : equip.getLiMarins()) {
+            dlm.addElement(m);
+        }
+
+        this.jListEquipage.setModel(dlm);
     }
 
     /**
@@ -44,7 +75,7 @@ public class WinEquipage extends javax.swing.JDialog {
         jRadioButton5 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListEquipage = new javax.swing.JList();
         jSeparator1 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -58,15 +89,9 @@ public class WinEquipage extends javax.swing.JDialog {
 
         jLabel3.setText("Nom : ");
 
-        jTextField1.setText("jTextField1");
-
         jLabel4.setText("Prénom : ");
 
-        jTextField2.setText("jTextField2");
-
         jLabel5.setText("Date de naissance : ");
-
-        jTextField3.setText("jTextField3");
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Capitaine");
@@ -85,12 +110,17 @@ public class WinEquipage extends javax.swing.JDialog {
 
         jButton1.setText("Ok");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jListEquipage.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jListEquipage.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListEquipageValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jListEquipage);
 
         jButton2.setText("Valider équipage");
 
@@ -191,6 +221,10 @@ public class WinEquipage extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jListEquipageValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListEquipageValueChanged
+        System.out.print("value changed");
+    }//GEN-LAST:event_jListEquipageValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -243,7 +277,7 @@ public class WinEquipage extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList jList1;
+    private javax.swing.JList jListEquipage;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;

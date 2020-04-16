@@ -53,14 +53,22 @@ public class WinHarbour extends javax.swing.JFrame {
         setTitle("Capitainerie d'Inpres-Harbour");
         mainPanelSetEnabled(false);
         AffichageDate();
+        
+        this.setLocationRelativeTo(null);
     }
     
 
     private void mainPanelSetEnabled(boolean val) {
         Component[] com = mainPanel.getComponents();
+        Component[] menBarCom = mainMenuBar.getComponents();
 
         for (Component c : com) {
             c.setEnabled(val);
+        }
+
+        for (int i = 0; i < menBarCom.length; i++) {
+            if (i != 0 && i != menBarCom.length -1)
+                menBarCom[i].setEnabled(val);
         }
 
         if (val) {

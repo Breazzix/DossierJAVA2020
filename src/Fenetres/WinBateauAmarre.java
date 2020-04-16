@@ -5,6 +5,15 @@
  */
 package Fenetres;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.RootPaneContainer;
+
+import Classes.Bateau;
+import Classes.Equipage;
+import Classes.Marin;
 
 /**
  *
@@ -12,17 +21,61 @@ package Fenetres;
  */
 public class WinBateauAmarre extends javax.swing.JDialog {
 
-    /**
-     * Creates new form winBateauAmarre
-     */
 
     java.awt.Frame parentWindow;
 
+    Marin p1 = new Marin("Turner", "Will", "", "Passager");
+    Marin p2 = new Marin("Swan", "Elizabeth", "", "Passager");
+    List<Marin> psg = new ArrayList<Marin>();
+    
+    Bateau bateau;
+    Equipage eqip;
+
     public WinBateauAmarre(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        
+
         parentWindow = parent;
         initComponents();
+        setLocation(parent);
+
+
+        
+        initValues();
+    }
+
+    private void initValues() {
+        psg.add(p1);
+        psg.add(p2);
+
+        Marin cap = new Marin("Saprrow", "Jack", "", "Capitaine");
+        Marin sec = new Marin("Barbossa", "Hector", "", "Second");
+
+        eqip = new Equipage(psg, cap, sec);
+
+        bateau = new Bateau("Black Pearl", "Caraibes", 30, 50, "Tortuga", eqip);
+
+        jLabelNomBat.setText(bateau.getNom());
+        jTxtf_PortAtache.setText(bateau.getPortAttache());
+        jTxtfTonnage.setText(String.valueOf(bateau.getTonnage()));
+
+        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) this.jComboBoxEquip.getModel();
+        comboModel.removeAllElements();
+        
+        // if (bateau.getEquipage().getCapitaine().getNom() == null)
+            System.out.println(bateau);
+
+        comboModel.addElement(bateau.getEquipage().getCapitaine());
+        // Marin secc = bateau.getEquipage().getSecond();
+        if (sec != null)
+            comboModel.addElement(bateau.getEquipage().getSecond());
+        for (Marin m : bateau.getEquipage().getLiMarins()) {
+            comboModel.addElement(m);
+        }
+    }
+
+    private void setLocation(java.awt.Frame parent) {
+        int posX = parent.getLocation().x + ((RootPaneContainer) parent).getContentPane().getSize().height / 2;
+        this.setLocation(posX,  parent.getLocation().y + 100);
     }
 
     /**
@@ -38,17 +91,17 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelNomBat = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTxtf_PortAtache = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTxtfTonnage = new javax.swing.JTextField();
         btnEquipage = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxEquip = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
         btnOk = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAnnuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,7 +114,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Q2*4");
 
-        jLabel5.setText("Marie Hurlante");
+        jLabelNomBat.setText("Marie Hurlante");
 
         jLabel6.setText("Image");
 
@@ -76,7 +129,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnOk.setText("Ok");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +138,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setText("Annuler");
+        btnAnnuler.setText("Annuler");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,20 +156,20 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(jTxtf_PortAtache))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5)
+                            .addComponent(jLabelNomBat)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jComboBoxEquip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2)))
+                        .addComponent(jTxtfTonnage)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
@@ -126,7 +179,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                 .addGap(123, 123, 123)
                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jButton3)
+                .addComponent(btnAnnuler)
                 .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,7 +192,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabelNomBat))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -147,21 +200,21 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtf_PortAtache, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtfTonnage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEquipage)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
-                    .addComponent(jButton3))
+                    .addComponent(btnAnnuler))
                 .addGap(18, 18, 18))
         );
 
@@ -173,7 +226,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnEquipageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquipageActionPerformed
-        WinEquipage win = new WinEquipage(parentWindow, true);
+        WinEquipage win = new WinEquipage(parentWindow, true, eqip);
         win.setVisible(true);
     }//GEN-LAST:event_btnEquipageActionPerformed
 
@@ -221,20 +274,20 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAnnuler;
     private javax.swing.JButton btnEquipage;
     private javax.swing.JButton btnOk;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBoxEquip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelNomBat;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTxtfTonnage;
+    private javax.swing.JTextField jTxtf_PortAtache;
     // End of variables declaration//GEN-END:variables
 }

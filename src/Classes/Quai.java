@@ -9,10 +9,23 @@ package Classes;
  *
  * @author vange
  */
-public class Quai {
+public class Quai extends Amarrage {
+    
+    private MoyenDeTransportSurEau[] liste;
+    
     public MoyenDeTransportSurEau[] getListe()
     {
-         return null;       
+         return liste;
+    }
+
+    @Override
+    int getCapacite() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getIdentifiant() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
