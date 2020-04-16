@@ -43,6 +43,16 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         initValues();
     }
 
+    public WinBateauAmarre(java.awt.Frame parent, boolean modal, Bateau bat) {
+        super(parent, modal);
+
+        parentWindow = parent;
+        initComponents();
+        setLocation(parent);
+
+        bateau = bat;
+    }
+
     private void initValues() {
         psg.add(p1);
         psg.add(p2);
@@ -60,9 +70,6 @@ public class WinBateauAmarre extends javax.swing.JDialog {
 
         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) this.jComboBoxEquip.getModel();
         comboModel.removeAllElements();
-        
-        // if (bateau.getEquipage().getCapitaine().getNom() == null)
-            System.out.println(bateau);
 
         comboModel.addElement(bateau.getEquipage().getCapitaine());
         // Marin secc = bateau.getEquipage().getSecond();
@@ -228,6 +235,19 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     private void btnEquipageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquipageActionPerformed
         WinEquipage win = new WinEquipage(parentWindow, true, eqip);
         win.setVisible(true);
+        System.out.println("les value de equip : ");
+        System.out.println(eqip);
+
+        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) this.jComboBoxEquip.getModel();
+        comboModel.removeAllElements();
+
+        comboModel.addElement(bateau.getEquipage().getCapitaine());
+        Marin secc = bateau.getEquipage().getSecond();
+        if (secc != null)
+            comboModel.addElement(bateau.getEquipage().getSecond());
+        for (Marin m : bateau.getEquipage().getLiMarins()) {
+            comboModel.addElement(m);
+        }
     }//GEN-LAST:event_btnEquipageActionPerformed
 
     /**

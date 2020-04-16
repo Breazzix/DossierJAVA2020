@@ -5,6 +5,10 @@
  */
 package Fenetres;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 import Classes.Equipage;
@@ -21,6 +25,7 @@ public class WinEquipage extends javax.swing.JDialog {
      * Creates new form WinEquipage
      */
     Equipage equip;
+    List<Marin> listMarin = new ArrayList<>();
 
 
     public WinEquipage(java.awt.Frame parent, boolean modal) {
@@ -63,22 +68,22 @@ public class WinEquipage extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldNom = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldPrenom = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jTextFieldDateNaissance = new javax.swing.JTextField();
+        jRadioBtnCapitaine = new javax.swing.JRadioButton();
+        jRadioBtnSecond = new javax.swing.JRadioButton();
+        jRadioBtnBosco = new javax.swing.JRadioButton();
+        jRadioBtnMatelot = new javax.swing.JRadioButton();
+        jRadioBtnPassager = new javax.swing.JRadioButton();
+        btnOk = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListEquipage = new javax.swing.JList();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnValider = new javax.swing.JButton();
+        btnAbondonner = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,22 +98,27 @@ public class WinEquipage extends javax.swing.JDialog {
 
         jLabel5.setText("Date de naissance : ");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Capitaine");
+        buttonGroup1.add(jRadioBtnCapitaine);
+        jRadioBtnCapitaine.setText("Capitaine");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Second");
+        buttonGroup1.add(jRadioBtnSecond);
+        jRadioBtnSecond.setText("Second");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Bosco");
+        buttonGroup1.add(jRadioBtnBosco);
+        jRadioBtnBosco.setText("Bosco");
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("Matelot");
+        buttonGroup1.add(jRadioBtnMatelot);
+        jRadioBtnMatelot.setText("Matelot");
 
-        buttonGroup1.add(jRadioButton5);
-        jRadioButton5.setText("Passager");
+        buttonGroup1.add(jRadioBtnPassager);
+        jRadioBtnPassager.setText("Passager");
 
-        jButton1.setText("Ok");
+        btnOk.setText("Ok");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
 
         jListEquipage.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -122,9 +132,19 @@ public class WinEquipage extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jListEquipage);
 
-        jButton2.setText("Valider équipage");
+        btnValider.setText("Valider équipage");
+        btnValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValiderActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Abondonner");
+        btnAbondonner.setText("Abondonner");
+        btnAbondonner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbondonnerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,31 +169,31 @@ public class WinEquipage extends javax.swing.JDialog {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(68, 68, 68)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jTextFieldDateNaissance, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldNom, javax.swing.GroupLayout.Alignment.LEADING))
                                         .addGap(12, 12, 12))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton4)
-                                    .addComponent(jRadioButton1))
+                                    .addComponent(jRadioBtnMatelot)
+                                    .addComponent(jRadioBtnCapitaine))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton5)
+                                    .addComponent(jRadioBtnPassager)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jRadioButton2)
+                                        .addComponent(jRadioBtnSecond)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton3)))))
+                                        .addComponent(jRadioBtnBosco)))))
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(129, 129, 129)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnValider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAbondonner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(175, 175, 175))
         );
         layout.setVerticalGroup(
@@ -188,33 +208,33 @@ public class WinEquipage extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldDateNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton3)))
+                            .addComponent(jRadioBtnCapitaine)
+                            .addComponent(jRadioBtnSecond)
+                            .addComponent(jRadioBtnBosco)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5))
+                    .addComponent(jRadioBtnMatelot)
+                    .addComponent(jRadioBtnPassager))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnOk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnValider)
+                    .addComponent(btnAbondonner))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -225,6 +245,55 @@ public class WinEquipage extends javax.swing.JDialog {
         System.out.print("value changed");
     }//GEN-LAST:event_jListEquipageValueChanged
 
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        String nom = jTextFieldNom.getText();
+        String prenom = jTextFieldPrenom.getText();
+        String dateDeNaiss = jTextFieldDateNaissance.getText();
+        String fonction = getSelectedRadioBtn();
+
+        Marin m = new Marin(nom, prenom, dateDeNaiss, fonction);
+
+        listMarin.add(m);
+
+        DefaultListModel comboModel = (DefaultListModel) this.jListEquipage.getModel();
+        
+        comboModel.addElement(m);
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderActionPerformed
+        for (Marin m : listMarin) {
+            if (m.getFonction() == "Second") {
+                equip.setSecond(m);
+            }
+            else if (m.getFonction() == "Capitaine"){
+                equip.setCapitaine(m);
+            }
+            else {
+                equip.getLiMarins().add(m);
+            }
+        }
+
+        this.dispose();
+    }//GEN-LAST:event_btnValiderActionPerformed
+
+    private void btnAbondonnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbondonnerActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnAbondonnerActionPerformed
+
+    private String getSelectedRadioBtn() {
+        if (jRadioBtnCapitaine.isSelected())
+            return "Capitaine";
+        if (jRadioBtnSecond.isSelected())
+            return "Second";
+        if (jRadioBtnBosco.isSelected())
+            return "Bosco";
+        if (jRadioBtnMatelot.isSelected())
+            return "Matelot";
+        if (jRadioBtnPassager.isSelected())
+            return "Passager";
+
+        return null;
+    }
     /**
      * @param args the command line arguments
      */
@@ -268,25 +337,25 @@ public class WinEquipage extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbondonner;
+    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnValider;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JList jListEquipage;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioBtnBosco;
+    private javax.swing.JRadioButton jRadioBtnCapitaine;
+    private javax.swing.JRadioButton jRadioBtnMatelot;
+    private javax.swing.JRadioButton jRadioBtnPassager;
+    private javax.swing.JRadioButton jRadioBtnSecond;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldDateNaissance;
+    private javax.swing.JTextField jTextFieldNom;
+    private javax.swing.JTextField jTextFieldPrenom;
     // End of variables declaration//GEN-END:variables
 }
