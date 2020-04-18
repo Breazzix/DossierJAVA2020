@@ -18,12 +18,14 @@ public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant {
     private Equipage equipage;
 
     public Bateau() {
+        
         try {
-            setNom("b0");
-            setPortAttache("pa0");
+            setNom("inconnu");
+            setPortAttache("inconnu");
             setTonnage(0);
             setLongueur(0);
             setPavillon("inconnu");
+            equipage = new Equipage();
         } catch (ShipWithoutIdentificationException e) {
             System.out.println(e.getMessage());
         }

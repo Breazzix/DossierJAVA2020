@@ -11,6 +11,8 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
+import javax.swing.RootPaneContainer;
+
 import Classes.Equipage;
 // import Classes.Marin;
 import Classes.Marin;
@@ -36,23 +38,38 @@ public class WinEquipage extends javax.swing.JDialog {
     public WinEquipage(java.awt.Frame parent, boolean modal, Equipage equipage) {
         super(parent, modal);
         initComponents();
+        setLocation(parent);
 
         equip = equipage;
         initList();
+    }
 
-        System.out.println(equip);
+    private void setLocation(java.awt.Frame parent) {
+        int posX = parent.getLocation().x + ((RootPaneContainer) parent).getContentPane().getSize().height / 2;
+        this.setLocation(posX,  parent.getLocation().y + 100);
     }
 
     private void initList() {
         DefaultListModel dlm = new DefaultListModel<>();
-        dlm.addElement(equip.getCapitaine());
-        if (equip.getSecond() != null)
+        if (equip.getCapitaine().getNom() != "inconnu") {
+            dlm.addElement(equip.getCapitaine());
+            jRadioBtnCapitaine.setEnabled(false);
+        }
+            
+        if (equip.getSecond().getNom() != "inconnu") {
             dlm.addElement(equip.getSecond());
+            jRadioBtnSecond.setEnabled(false);
+        }
+            
+        
+        // System.out.println(equip.getLiMarins());
         for (Marin m : equip.getLiMarins()) {
             dlm.addElement(m);
         }
 
         this.jListEquipage.setModel(dlm);
+
+
     }
 
     /**
@@ -245,11 +262,14 @@ public class WinEquipage extends javax.swing.JDialog {
         System.out.print("value changed");
     }//GEN-LAST:event_jListEquipageValueChanged
 
+
+
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         String nom = jTextFieldNom.getText();
         String prenom = jTextFieldPrenom.getText();
         String dateDeNaiss = jTextFieldDateNaissance.getText();
         String fonction = getSelectedRadioBtn();
+        clearTextBox();
 
         Marin m = new Marin(nom, prenom, dateDeNaiss, fonction);
 
@@ -259,6 +279,14 @@ public class WinEquipage extends javax.swing.JDialog {
         
         comboModel.addElement(m);
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void clearTextBox() {
+        jTextFieldNom.setText("");
+        jTextFieldPrenom.setText("");
+        jTextFieldDateNaissance.setText("");
+    }
+
+
 
     private void btnValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderActionPerformed
         for (Marin m : listMarin) {
@@ -281,10 +309,14 @@ public class WinEquipage extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAbondonnerActionPerformed
 
     private String getSelectedRadioBtn() {
-        if (jRadioBtnCapitaine.isSelected())
+        if (jRadioBtnCapitaine.isSelected()) {
+            jRadioBtnCapitaine.setEnabled(false);
             return "Capitaine";
-        if (jRadioBtnSecond.isSelected())
+        }
+        if (jRadioBtnSecond.isSelected()) {
+            jRadioBtnSecond.setEnabled(false);
             return "Second";
+        }
         if (jRadioBtnBosco.isSelected())
             return "Bosco";
         if (jRadioBtnMatelot.isSelected())

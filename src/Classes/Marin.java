@@ -14,7 +14,7 @@ public class Marin extends Humain implements AUnIdentifiant{
     public Marin()
     {
         super();
-        setFonction("fct inconnue");
+        setFonction("");
     }
 
    

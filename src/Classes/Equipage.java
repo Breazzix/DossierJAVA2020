@@ -5,6 +5,7 @@
  */
 package Classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,9 +18,9 @@ public class Equipage {
     private Marin second;
 
     public Equipage() {
-        setListMarins(null);
-        setCapitaine(null);
-        setSecond(null);
+        setListMarins(new ArrayList<>());
+        setCapitaine(new Marin());
+        setSecond(new Marin());
     }
 
     public Equipage(List<Marin> list, Marin cap, Marin sec) {

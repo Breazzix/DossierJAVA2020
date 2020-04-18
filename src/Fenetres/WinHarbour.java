@@ -5,11 +5,17 @@
  */
 package Fenetres;
 
+import Classes.Bateau;
+import Classes.Equipage;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,10 +25,11 @@ public class WinHarbour extends javax.swing.JFrame {
 
     private static boolean loggedIn = false;
    
-
     private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
     private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
     private final static int[] timeFormat = {DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.FULL};
+
+    Bateau bateau = new Bateau("Black Pearl", "Caraibes", 30, 50, "Tortuga", new Equipage());
 
     /**
      * @return the loggedIn
@@ -55,6 +62,16 @@ public class WinHarbour extends javax.swing.JFrame {
         AffichageDate();
         
         this.setLocationRelativeTo(null);
+        setIcon();
+        
+    }
+    
+    public final void setIcon()
+    {
+        String str = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "Amy_Johnson.jpg";
+        ImageIcon image = new ImageIcon(str);
+        jLabelImage1.setText(null);
+        jLabelImage1.setIcon(image);
     }
     
 
@@ -148,7 +165,7 @@ public class WinHarbour extends javax.swing.JFrame {
         btnEnvoyerChoix = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         btnEnvoyerConfirm = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelImage1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listBatEntree = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
@@ -189,13 +206,8 @@ public class WinHarbour extends javax.swing.JFrame {
 
         btnEnvoyerConfirm.setText("Envoyer confirmation");
 
-        jLabel2.setText("jLabel2");
+        jLabelImage1.setText("jLabel2");
 
-        listBatEntree.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listBatEntree);
 
         jLabel3.setText("Bateaux en entrée");
@@ -257,7 +269,7 @@ public class WinHarbour extends javax.swing.JFrame {
                                 .addComponent(btnLire))
                             .addComponent(btnServeur)
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addGap(18, 18, 18)
@@ -309,12 +321,13 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnBateauAmarre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBateauAmarre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addComponent(jLabelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -440,6 +453,9 @@ public class WinHarbour extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mItmNouveauActionPerformed
 
+
+
+
     private void mItmAuteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmAuteurActionPerformed
        Auteurs auteurs = new Auteurs(this, rootPaneCheckingEnabled);
        auteurs.setVisible(true);
@@ -467,9 +483,16 @@ public class WinHarbour extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mItmCbDateActionPerformed
 
+    DefaultListModel listModel = new DefaultListModel<>();
     private void btnBateauAmarreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBateauAmarreActionPerformed
-        WinBateauAmarre win = new WinBateauAmarre(this, true);
+        WinBateauAmarre win = new WinBateauAmarre(this, true, bateau);
         win.setVisible(true);
+
+        listModel.addElement(bateau);
+        this.listBatEntree.setModel(listModel);
+
+        
+
     }//GEN-LAST:event_btnBateauAmarreActionPerformed
 
 
@@ -520,9 +543,9 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelImage1;
     private static javax.swing.JLabel jLabel_DATE;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

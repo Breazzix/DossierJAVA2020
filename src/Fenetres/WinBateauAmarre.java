@@ -29,7 +29,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     List<Marin> psg = new ArrayList<Marin>();
     
     Bateau bateau;
-    Equipage eqip;
+    Equipage eqip = new Equipage();
 
     public WinBateauAmarre(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -51,7 +51,12 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         setLocation(parent);
 
         bateau = bat;
+
+        jLabelNomBat.setText(bateau.getNom());
+
     }
+
+
 
     private void initValues() {
         psg.add(p1);
@@ -135,8 +140,6 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                 btnEquipageActionPerformed(evt);
             }
         });
-
-        jComboBoxEquip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnOk.setText("Ok");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -233,17 +236,15 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnEquipageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquipageActionPerformed
-        WinEquipage win = new WinEquipage(parentWindow, true, eqip);
+        WinEquipage win = new WinEquipage(parentWindow, true, bateau.getEquipage());
         win.setVisible(true);
-        System.out.println("les value de equip : ");
-        System.out.println(eqip);
 
         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) this.jComboBoxEquip.getModel();
         comboModel.removeAllElements();
 
-        comboModel.addElement(bateau.getEquipage().getCapitaine());
-        Marin secc = bateau.getEquipage().getSecond();
-        if (secc != null)
+        if (bateau.getEquipage().getCapitaine().getNom() != "inconnu")
+            comboModel.addElement(bateau.getEquipage().getCapitaine());
+        if (bateau.getEquipage().getSecond().getNom() != "inconnu")
             comboModel.addElement(bateau.getEquipage().getSecond());
         for (Marin m : bateau.getEquipage().getLiMarins()) {
             comboModel.addElement(m);
