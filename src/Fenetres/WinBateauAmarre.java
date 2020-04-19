@@ -14,6 +14,7 @@ import javax.swing.RootPaneContainer;
 import Classes.Bateau;
 import Classes.Equipage;
 import Classes.Marin;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -53,7 +54,15 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         bateau = bat;
 
         jLabelNomBat.setText(bateau.getNom());
-
+        setIcon();
+    }
+    
+    public final void setIcon()
+    {
+        String str = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "Eng_flag.jpg";
+        ImageIcon image = new ImageIcon(str);
+        jLabelFlag.setText(null);
+        jLabelFlag.setIcon(image);
     }
 
 
@@ -104,7 +113,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabelNomBat = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelFlag = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTxtf_PortAtache = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -128,7 +137,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
 
         jLabelNomBat.setText("Marie Hurlante");
 
-        jLabel6.setText("Image");
+        jLabelFlag.setText("Image");
 
         jLabel7.setText("Port d'atache : ");
 
@@ -172,7 +181,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabelNomBat)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelFlag, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,7 +215,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelFlag, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -232,7 +241,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnEquipageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquipageActionPerformed
@@ -303,9 +312,9 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelFlag;
     private javax.swing.JLabel jLabelNomBat;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTxtfTonnage;
