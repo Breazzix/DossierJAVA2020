@@ -6,7 +6,13 @@
 package Fenetres;
 
 import Classes.BaseException;
+import Classes.FichierConfig;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Hashtable;
+import java.util.Properties;
 
 import javax.swing.RootPaneContainer;
 
@@ -16,7 +22,6 @@ import javax.swing.RootPaneContainer;
  */
 public class Login extends javax.swing.JDialog {
 
-    public static Hashtable<String, String> h = new Hashtable<String, String>();;
     private java.awt.Frame parent;
 
     private boolean inscrire;
@@ -45,29 +50,61 @@ public class Login extends javax.swing.JDialog {
         this.setLocation(posX,  parent.getLocation().y + 100);
     }
     
-     public void VerifFields(String key, String pswd) throws BaseException
-     {
-         if (isInscrire()) {
-            if (key.isEmpty() || pswd.isEmpty())
-                throw new BaseException(this.parent, "Erreur de l'inscription !!!");
-            else {
-                h.put(key, pswd);
-                System.out.println(h);
-
-                WinHarbour.setLoggedIn(true);
-                this.dispose();
+     
+      public void addprop(String u, String p) throws BaseException
+      {
+        Properties proplog = new Properties();
+        String NomFich = FichierConfig.getNomsFichs("login");
+        try 
+        {
+            proplog.load(new FileInputStream(NomFich));
+        } 
+        catch(FileNotFoundException e) { System.out.println("Aie: "+ e.getMessage()); }
+        catch(IOException e) { System.out.println("Aie: "+ e.getMessage()); }
+        
+        if(u.equals("") || p.equals(""))
+            throw new BaseException(this.parent, "Les champs sont vides");
+        else
+        {
+            if(u.equals("admin"))
+                throw new BaseException(this.parent, "Le nom d'utilisateur admin est unique");
+            else
+            {
+                try 
+                {
+                    proplog.setProperty(u, p);
+                    proplog.store(new FileOutputStream(NomFich), null);
+                 
+                } 
+                catch (FileNotFoundException e) { System.out.println("Aie: "+ e.getMessage()); } 
+                catch (IOException e) { System.out.println("Aie: "+ e.getMessage()); }
             }
-         }
-         else {
-            if (h.containsKey(key) && h.containsValue(pswd)) {
+        }
+    }
+    
+    public void loadprop(String u, String p) throws BaseException
+    {
+        Properties proplog = new Properties();
+        String NomFich = FichierConfig.getNomsFichs("login");
+        try 
+        {
+            proplog.load(new FileInputStream(NomFich));
+        } 
+        catch(FileNotFoundException e) { System.out.println("Aie: "+ e.getMessage()); }
+        catch(IOException e) { System.out.println("Aie: "+ e.getMessage()); }
+        
+        if(proplog.getProperty(u) == null) 
+            throw new BaseException(this.parent, "Le nom d'utilisateur est incorrect");
+        else
+        {
+            if(!p.equals(proplog.getProperty(u)))
+                throw new BaseException(this.parent, "Le mot de passe est incorrect");
+            else
+            {
                 WinHarbour.setLoggedIn(true);
-                 this.dispose();
-             }
-             else
-                 throw new BaseException(this.parent, "Erreur de login !!!");
-         }
-         
-     }
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,8 +208,17 @@ public class Login extends javax.swing.JDialog {
         String pswd = new String(jPasswordField.getPassword());
         try 
         {
-            VerifFields(jTextFieldUserName.getText(), pswd);
-        } 
+             if (isInscrire()) {
+            
+                addprop(jTextFieldUserName.getText(), pswd);
+                this.dispose();
+            }
+            else
+            {
+                loadprop(jTextFieldUserName.getText(), pswd);
+                this.dispose();
+            }
+        }
         catch (BaseException e)
         {
             System.out.println(e.getMessage());

@@ -7,6 +7,7 @@ package Fenetres;
 
 import Classes.Bateau;
 import Classes.Equipage;
+import Classes.FichierConfig;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.util.Date;
@@ -68,8 +69,8 @@ public class WinHarbour extends javax.swing.JFrame {
     
     public final void setIcon()
     {
-        String str = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "BateauImage.jpg";
-        ImageIcon image = new ImageIcon(str);
+        String NomFich = FichierConfig.getNomsFichs("bateau");
+        ImageIcon image = new ImageIcon(NomFich);
         jLabelImage1.setText(null);
         jLabelImage1.setIcon(image);
     }

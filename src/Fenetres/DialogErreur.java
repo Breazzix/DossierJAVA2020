@@ -5,6 +5,7 @@
  */
 package Fenetres;
 
+import Classes.FichierConfig;
 import javax.swing.ImageIcon;
 
 /**
@@ -34,8 +35,8 @@ public class DialogErreur extends javax.swing.JDialog {
     
     public final void setIcon()
     {
-        String str = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "Err.jpg";
-        ImageIcon image = new ImageIcon(str);
+        String NomFich = FichierConfig.getNomsFichs("erreur");
+        ImageIcon image = new ImageIcon(NomFich);
         jLabeliconErr.setText(null);
         jLabeliconErr.setIcon(image);
     }
@@ -76,21 +77,22 @@ public class DialogErreur extends javax.swing.JDialog {
                         .addGap(27, 27, 27)
                         .addComponent(jLabelErr, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabeliconErr, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jButtonOk)))
                 .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabeliconErr, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabelErr)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabeliconErr, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabeliconErr, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonOk)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
