@@ -5,8 +5,14 @@
  */
 package Fenetres;
 
+import Classes.Bateau;
+import Classes.BateauPeche;
+import Classes.BateauPlaisance;
+import Classes.Equipage;
 import Classes.FichierConfig;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import sun.management.Agent;
 
 /**
  *
@@ -17,17 +23,33 @@ public class Applic_Phare extends javax.swing.JFrame {
     /**
      * Creates new form Applic_Phare
      */
+    
+    private static DefaultListModel modelBat = new DefaultListModel();
+    
     public Applic_Phare() {
         initComponents();
         setIcon();
+        start();
     }
     
-     public final void setIcon()
+    public final void setIcon()
     {
         String NomFich = FichierConfig.getNomsFichs("phare");
         ImageIcon image = new ImageIcon(NomFich);
         jLabeImage.setText(null);
         jLabeImage.setIcon(image);
+    }
+    
+    public void start()
+    {
+        BateauPeche bateauP1 = new BateauPeche("Black Pearl", "Caraibes","thonier", 30, 50, "Tortuga", null);
+        BateauPlaisance bateauPl1 = new BateauPlaisance("Warren", "Monaco", 50, 70, "UK", null);
+        BateauPeche bateauP2 = new BateauPeche("RoYog", "Anvers","thonier",120, 80, "Anvers", null);
+        
+        jListBateau.setModel(modelBat);
+        modelBat.addElement(bateauP1);
+        modelBat.addElement(bateauPl1);
+        modelBat.addElement(bateauP2);
     }
 
     /**
@@ -44,7 +66,7 @@ public class Applic_Phare extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonSuivant = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListBateau = new javax.swing.JList();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldBateauid = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -70,16 +92,16 @@ public class Applic_Phare extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Bateau en attente");
 
         jButtonSuivant.setText("Suivant");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jListBateau.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListBateau);
 
         jLabel2.setText("Bateau identifié:");
 
@@ -148,16 +170,17 @@ public class Applic_Phare extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(167, 167, 167)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonSuivant)
                                 .addGap(192, 192, 192)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextFieldBateauid, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(11, Short.MAX_VALUE))))
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(106, 106, 106))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +280,7 @@ public class Applic_Phare extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelRep;
-    private javax.swing.JList jList1;
+    private javax.swing.JList jListBateau;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMitmLogin;
