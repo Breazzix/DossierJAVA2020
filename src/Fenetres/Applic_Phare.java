@@ -7,12 +7,10 @@ package Fenetres;
 
 import Classes.Bateau;
 import Classes.BateauPeche;
-import Classes.BateauPlaisance;
-import Classes.Equipage;
+import Classes.BateauPlaisance;;
 import Classes.FichierConfig;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import sun.management.Agent;
 
 /**
  *
@@ -50,6 +48,11 @@ public class Applic_Phare extends javax.swing.JFrame {
         modelBat.addElement(bateauP1);
         modelBat.addElement(bateauPl1);
         modelBat.addElement(bateauP2);
+    }
+    
+    public static void setjTextFieldBateauId(Bateau bat)
+    {
+        jTextFieldBateauid.setText(bat.toString2());
     }
 
     /**
@@ -95,6 +98,11 @@ public class Applic_Phare extends javax.swing.JFrame {
         jLabel1.setText("Bateau en attente");
 
         jButtonSuivant.setText("Suivant");
+        jButtonSuivant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSuivantActionPerformed(evt);
+            }
+        });
 
         jListBateau.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -232,6 +240,12 @@ public class Applic_Phare extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBateauidActionPerformed
 
+    private void jButtonSuivantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuivantActionPerformed
+        Bateau bateau = (Bateau) modelBat.elementAt(0);
+        IdentificationBateau win = new IdentificationBateau(this, true, bateau);
+         win.setVisible(true);
+    }//GEN-LAST:event_jButtonSuivantActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,6 +300,6 @@ public class Applic_Phare extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMitmLogin;
     private javax.swing.JMenuItem jMitmLogout;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldBateauid;
+    private static javax.swing.JTextField jTextFieldBateauid;
     // End of variables declaration//GEN-END:variables
 }
