@@ -13,6 +13,7 @@ import javax.swing.RootPaneContainer;
 
 import Classes.Bateau;
 import Classes.Equipage;
+import Classes.FichierConfig;
 import Classes.Marin;
 import javax.swing.ImageIcon;
 
@@ -59,8 +60,8 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     
     public final void setIcon()
     {
-        String str = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "Eng_flag.jpg";
-        ImageIcon image = new ImageIcon(str);
+        String NomFich = FichierConfig.getNomsFichs(bateau.getPavillon());
+        ImageIcon image = new ImageIcon(NomFich);
         jLabelFlag.setText(null);
         jLabelFlag.setIcon(image);
     }
