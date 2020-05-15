@@ -17,6 +17,7 @@ import java.util.StringTokenizer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import network.*;
 
 /**
  *
@@ -25,6 +26,7 @@ import javax.swing.ImageIcon;
 public class WinHarbour extends javax.swing.JFrame {
 
     private static boolean loggedIn = false;
+     private NetworkBasicServer serv;
    
     private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
     private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
@@ -157,7 +159,6 @@ public class WinHarbour extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         btnServeur = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         btnLire = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -175,6 +176,7 @@ public class WinHarbour extends javax.swing.JFrame {
         datePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel_DATE = new javax.swing.JLabel();
+        jCheckReqAtt = new javax.swing.JCheckBox();
         mainMenuBar = new javax.swing.JMenuBar();
         menuUtilisateur = new javax.swing.JMenu();
         mItmLogin = new javax.swing.JMenuItem();
@@ -200,8 +202,11 @@ public class WinHarbour extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnServeur.setText("Démarrer le serveur");
-
-        jCheckBox1.setText("Requête en attente");
+        btnServeur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServeurActionPerformed(evt);
+            }
+        });
 
         btnLire.setText("Lire");
 
@@ -251,6 +256,9 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
+        jCheckReqAtt.setText("Requête en attente");
+        jCheckReqAtt.setEnabled(false);
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -259,7 +267,7 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckReqAtt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLire))
                     .addComponent(btnServeur)
@@ -276,7 +284,6 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGap(37, 37, 37)
@@ -311,9 +318,9 @@ public class WinHarbour extends javax.swing.JFrame {
                     .addComponent(datePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
                     .addComponent(btnLire)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckReqAtt))
                 .addGap(23, 23, 23)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -521,6 +528,14 @@ public class WinHarbour extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBateauAmarreActionPerformed
 
+    private void btnServeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServeurActionPerformed
+        if(isLoggedIn() == true)
+        {
+            int port = 60001;
+            serv = new NetworkBasicServer(port, jCheckReqAtt);
+        }
+    }//GEN-LAST:event_btnServeurActionPerformed
+
 
 
     /**
@@ -567,7 +582,7 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JButton btnServeur;
     private javax.swing.JPanel datePanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckReqAtt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -130,6 +130,10 @@ public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant {
     public String toString() { 
         return String.format(this.getNom() + " | " + this.getEquipage());
     }
+    
+     public String toString2() { 
+        return String.format(this.getNom() + " / " + this.getLongueur()+ "m");
+    }
 
 
 }

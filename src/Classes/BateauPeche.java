@@ -11,14 +11,15 @@ package Classes;
  */
 public class BateauPeche extends Bateau{
     
-    public BateauPeche(String name, String port, int tonnes, int lg, String nationalite, Equipage equip) {
+    public BateauPeche(String name, String port,String typeBat, int tonnes, int lg, String nationalite, Equipage equip) {
         super(name, port, tonnes, lg, nationalite, equip);
+        setType(typeBat);
         // TODO Auto-generated constructor stub
     }
 
     private String type;
     
-    public void setType(String t)
+    public final void setType(String t)
     {
         type = t;
     }
@@ -26,6 +27,11 @@ public class BateauPeche extends Bateau{
     public String getType()
     {
         return type;
+    }
+    
+    @Override
+    public String toString() { 
+        return String.format("Peche" + " | " + this.getPavillon());
     }
     
 }

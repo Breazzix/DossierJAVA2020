@@ -27,4 +27,9 @@ public class BateauPlaisance extends Bateau{
         return typePermis;
     }
     
+    @Override
+    public String toString() { 
+        return String.format("Plaisance" + " | " + this.getPavillon());
+    }
+    
 }

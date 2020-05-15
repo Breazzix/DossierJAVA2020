@@ -20,8 +20,8 @@ public class FichierConfig {
             nomF = System.getProperty("user.dir") + System.getProperty("file.separator") + "login.properties";
         if(str.equals("phare"))
             nomF = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "phare.jpg";
-        if(str.equals("En_flag"))
-            nomF = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "En_flag.jpg";
+        if(str.equals("UK"))
+            nomF = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "UK.jpg";
         if(str.equals("erreur"))
             nomF = System.getProperty("user.dir") + System.getProperty("file.separator") + "images" + System.getProperty("file.separator") + "Err.jpg";
         if(str.equals("bateau"))

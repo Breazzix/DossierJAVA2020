@@ -186,7 +186,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckReqAtt" min="-2" pref="121" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnLire" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -254,9 +254,9 @@
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLire" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCheckReqAtt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -290,11 +290,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="D&#xe9;marrer le serveur"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Requ&#xea;te en attente"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnServeurActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLire">
           <Properties>
@@ -407,6 +405,12 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JCheckBox" name="jCheckReqAtt">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Requ&#xea;te en attente"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
