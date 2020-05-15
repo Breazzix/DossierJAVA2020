@@ -5,10 +5,13 @@
  */
 package Fenetres;
 
+import Classes.BaseException;
 import Classes.Bateau;
 import Classes.BateauPeche;
 import Classes.BateauPlaisance;;
 import Classes.FichierConfig;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import network.*;
@@ -265,23 +268,39 @@ public class Applic_Phare extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSuivantActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Envoyer();
+        try {
+          Envoyer();  
+        } catch (BaseException e) {
+            Logger.getLogger(Applic_Phare.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public void Envoyer()
+    public void Envoyer() throws BaseException
     {
         if(client != null)
         {
-            Bateau BatTmp = (Bateau) modelBat.elementAt(0);
-            System.out.println(BatTmp);
-            //BatTmp.setNom(null);
-            //String tmp = newstmp.getTitre() + "/" + newstmp.getTexte() + "/" + newstmp.getJournaliste() + "/" + newstmp.getCategorie() + "/" + importance + "/" + motcle;
-           // String reponse = client.sendString(tmp);
+            if (jTextFieldBateauid.getText()=="??")
+                throw new BaseException(this, "aucun bateau n'a été identifié");
+            else
+            {
+                Bateau BatTmp = (Bateau) modelBat.elementAt(0);
+                String tmp = null;
+                tmp = BatTmp.getNom() + "/" + BatTmp.getPortAttache()+ "/" + BatTmp.getTonnage() + "/" + BatTmp.getLongueur() + "/" + BatTmp.getPavillon() + "/" + BatTmp.getEquipage() + "/";
+                if (BatTmp instanceof BateauPlaisance)
+                    tmp = tmp + "Plaisance";
+                else
+                    tmp = tmp + "Peche";
+
+                String reponse = client.sendString(tmp);
+            }
+           
         }
         else
         {
-           
+           throw new BaseException(this, "Le client n'est pas connecté au serveur !");
         }
+         
     }
     /**
      * @param args the command line arguments
