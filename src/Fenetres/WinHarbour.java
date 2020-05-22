@@ -6,8 +6,10 @@
 package Fenetres;
 
 import Classes.Bateau;
+import Classes.BateauPlaisance;
 import Classes.Equipage;
 import Classes.FichierConfig;
+import Classes.ShipWithoutIdentificationException;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.util.Date;
@@ -26,7 +28,9 @@ import network.*;
 public class WinHarbour extends javax.swing.JFrame {
 
     private static boolean loggedIn = false;
-     private NetworkBasicServer serv;
+    private NetworkBasicServer serv;
+    private String BateauRecu = new String();
+    private static Bateau bat;
    
     private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
     private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
@@ -90,6 +94,7 @@ public class WinHarbour extends javax.swing.JFrame {
             if (i != 0 && i != menBarCom.length -1)
                 menBarCom[i].setEnabled(val);
         }
+        jCheckReqAtt.setEnabled(false);
 
         if (val) {
             mItmLogin.getComponent().setEnabled(false);
@@ -147,6 +152,22 @@ public class WinHarbour extends javax.swing.JFrame {
     {
         mItmCbDate.setSelected(val);
     }
+    public static void setBatLu(String n) throws ShipWithoutIdentificationException
+    {
+        StringTokenizer st = new StringTokenizer(n, "/");
+        
+        String nom = st.nextToken();
+        String Port = st.nextToken();
+        int tonnage = Integer.parseInt(st.nextToken());
+        int longueur = Integer.parseInt(st.nextToken());
+        String pav = st.nextToken();
+       
+        bat = new Bateau (nom,Port,tonnage,longueur,pav,null);
+
+        jTextFieldBateauRecu.setText(bat.toString2());
+        
+       
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,7 +181,7 @@ public class WinHarbour extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         btnServeur = new javax.swing.JButton();
         btnLire = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldBateauRecu = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnChoisir = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
@@ -176,6 +197,7 @@ public class WinHarbour extends javax.swing.JFrame {
         datePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel_DATE = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jCheckReqAtt = new javax.swing.JCheckBox();
         mainMenuBar = new javax.swing.JMenuBar();
         menuUtilisateur = new javax.swing.JMenu();
@@ -209,6 +231,11 @@ public class WinHarbour extends javax.swing.JFrame {
         });
 
         btnLire.setText("Lire");
+        btnLire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLireActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Amarrage possible : ");
 
@@ -256,6 +283,17 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 133, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         jCheckReqAtt.setText("Requête en attente");
         jCheckReqAtt.setEnabled(false);
 
@@ -267,8 +305,8 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jCheckReqAtt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jCheckReqAtt, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLire))
                     .addComponent(btnServeur)
                     .addGroup(mainPanelLayout.createSequentialGroup()
@@ -294,7 +332,7 @@ public class WinHarbour extends javax.swing.JFrame {
                         .addGap(134, 134, 134))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
+                            .addComponent(jTextFieldBateauRecu)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -308,6 +346,11 @@ public class WinHarbour extends javax.swing.JFrame {
                                         .addGap(0, 106, Short.MAX_VALUE))
                                     .addComponent(jScrollPane1))))
                         .addContainerGap())))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +362,7 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLire)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldBateauRecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckReqAtt))
                 .addGap(23, 23, 23)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -341,6 +384,11 @@ public class WinHarbour extends javax.swing.JFrame {
                         .addComponent(jButton1))
                     .addComponent(jLabelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         menuUtilisateur.setText("Utilisateur");
@@ -536,6 +584,27 @@ public class WinHarbour extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnServeurActionPerformed
 
+    private void btnLireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLireActionPerformed
+        BateauRecu = serv.getMessage();
+        try {
+          setBatLu(BateauRecu);  
+        } catch (ShipWithoutIdentificationException e) {
+            System.out.println("Nom bateau inconnu");
+        }
+        
+           /* if(!NewsRecue.equals("RIEN"))
+            {
+                newsevent.setNews(NewsRecue);
+                newsevent.setLocalite("Charleroi");
+                listenewsbean.newsDetected(newsevent);
+                notificationNewsDetected(listenewsbean.getNotifyNewsEvent());
+            }
+            else
+            {
+                setNewsLue(NewsRecue);
+            }*/
+    }//GEN-LAST:event_btnLireActionPerformed
+
 
 
     /**
@@ -594,10 +663,11 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private static javax.swing.JTextField jTextFieldBateauRecu;
     private javax.swing.JList listBatEntree;
     private javax.swing.JMenuItem mItmAide;
     private javax.swing.JMenuItem mItmAuteur;
