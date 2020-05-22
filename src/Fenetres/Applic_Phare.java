@@ -280,7 +280,7 @@ public class Applic_Phare extends javax.swing.JFrame {
     {
         if(client != null)
         {
-            if (jTextFieldBateauid.getText()=="??")
+            if ("??".equals(jTextFieldBateauid.getText()))
                 throw new BaseException(this, "aucun bateau n'a été identifié");
             else
             {
