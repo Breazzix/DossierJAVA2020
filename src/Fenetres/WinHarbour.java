@@ -6,6 +6,7 @@
 package Fenetres;
 
 import Classes.Bateau;
+import Classes.BateauPeche;
 import Classes.BateauPlaisance;
 import Classes.Equipage;
 import Classes.FichierConfig;
@@ -162,7 +163,14 @@ public class WinHarbour extends javax.swing.JFrame {
         int longueur = Integer.parseInt(st.nextToken());
         String pav = st.nextToken();
        
-        bat = new Bateau (nom,Port,tonnage,longueur,pav,null);
+        if ("Plaisance".equals(st.nextToken()))
+            bat = new BateauPlaisance(nom,Port,tonnage,longueur,pav,null);
+        else
+        {
+            String type = st.nextToken();
+            bat = new BateauPeche(nom,Port,type,tonnage,longueur,pav,null);
+        }
+            
 
         jTextFieldBateauRecu.setText(bat.toString2());
         
@@ -240,6 +248,11 @@ public class WinHarbour extends javax.swing.JFrame {
         jLabel1.setText("Amarrage possible : ");
 
         btnChoisir.setText("Choisir");
+        btnChoisir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoisirActionPerformed(evt);
+            }
+        });
 
         btnEnvoyerChoix.setText("Envoyer Choix");
 
@@ -604,6 +617,17 @@ public class WinHarbour extends javax.swing.JFrame {
                 setNewsLue(NewsRecue);
             }*/
     }//GEN-LAST:event_btnLireActionPerformed
+
+    private void btnChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoisirActionPerformed
+        if (bat instanceof BateauPlaisance)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }//GEN-LAST:event_btnChoisirActionPerformed
 
 
 

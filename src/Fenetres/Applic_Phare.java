@@ -288,9 +288,13 @@ public class Applic_Phare extends javax.swing.JFrame {
                 String tmp = null;
                 tmp = BatTmp.getNom() + "/" + BatTmp.getPortAttache()+ "/" + BatTmp.getTonnage() + "/" + BatTmp.getLongueur() + "/" + BatTmp.getPavillon() + "/" + BatTmp.getEquipage() + "/";
                 if (BatTmp instanceof BateauPlaisance)
-                    tmp = tmp + "Plaisance";
+                    tmp = "Plaisance" + tmp;
                 else
-                    tmp = tmp + "Peche";
+                {
+                    BateauPeche BatPeche = (BateauPeche) BatTmp;
+                    tmp = "Peche" + tmp + BatPeche.getType();
+                }
+                    
 
                 String reponse = client.sendString(tmp);
             }
