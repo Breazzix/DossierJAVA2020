@@ -8,7 +8,10 @@ package Fenetres;
 import Classes.Bateau;
 import Classes.BateauPeche;
 import Classes.Ponton;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,18 +25,80 @@ public class ListeAmarrages extends javax.swing.JDialog {
      * @param modal
      * @param bat
      */
+    
+    Vector<Ponton> vpt;
+    private Object[] col = { "ponton", "emplacement", "bateau", "port d'attache" };
+    private DefaultTableModel modelTable = new DefaultTableModel(col, 0);
+    int BatEnregistre=0;
+    
     public ListeAmarrages(java.awt.Frame parent, boolean modal, Bateau bat, Vector<Ponton> listePontons) {
         super(parent, modal);
         initComponents();
+        vpt = listePontons;
+        AtStartUp();
+        
         if (bat instanceof BateauPeche)
         {
             setTitle("Capitainerie-Peche: Liste des amarrages");
+            
         }
         else
         {
             setTitle("Capitainerie-Plaisance: Liste des amarrages");
         }
     }
+    
+    private void AtStartUp(){
+        Ponton addPonton;
+        Bateau bat;
+        int i=0,j,x;
+        String ponton;
+        
+        Enumeration enm = vpt.elements();
+ 
+        
+        while(enm.hasMoreElements()){
+            addPonton = vpt.get(i);
+            x=1;
+            while (x<=2){
+                ponton = String.valueOf(addPonton.getNumero()) + x;
+                j=0;
+                
+                bat = (Bateau) addPonton.getListe(x)[j];
+                
+                insertTab(bat,j,"");
+                j++;
+                
+                while (j<addPonton.getNombreEmplacements())
+                {
+                    insertTab(bat,j,ponton);
+                    j++;
+                    BatEnregistre++;
+                }
+                x++;
+            }
+            i++;
+            enm.nextElement();
+        }
+    }
+    
+    private void insertTab(Bateau bateau, int emplacement, String ponton)
+    {
+        Object[]data;
+        if (bateau == null)
+        {
+            data = {ponton,emplacement+1,"",""};
+        }
+        else
+        {
+            Object[] data = {ponton,emplacement+1,bateau.getNom(),bateau.getPortAttache()};
+        }
+             
+                    
+        modelTable.insertRow(BatEnregistre,data);
+        jTableAmarrages.setModel(modelTable);
+    }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +129,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {

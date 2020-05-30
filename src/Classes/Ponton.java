@@ -7,6 +7,7 @@ package Classes;
 
 import java.util.List;
 import java.util.Vector;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 
 /**
  *
@@ -35,13 +36,19 @@ public class Ponton extends Amarrage {
         numero = num;
     }
     
-    
-    
     public MoyenDeTransportSurEau[] getListe(int side) {
         if (side == 1)
             return liste1;
         else
             return liste2;
+    }
+    
+    public int getNombreEmplacements(){
+        return nombreEmplacements;          
+    }
+    
+    public int getNumero(){
+        return numero;
     }
     
     // public addElement(MoyenDeTransportSurEau obj) {
@@ -56,6 +63,11 @@ public class Ponton extends Amarrage {
     @Override
     public String getIdentifiant() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     @Override
+    public String toString() { 
+        return String.format(this.getNumero() + "/" + this.getNombreEmplacements());
     }
     
     /*public MoyenDeTransportEau[] getListe(int cote)

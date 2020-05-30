@@ -34,10 +34,10 @@ public class WinHarbour extends javax.swing.JFrame {
     private NetworkBasicServer serv;
     private String BateauRecu = new String();
     private static Bateau bat;
-    private Ponton ponton1 = new Ponton(1,4);
-    private Ponton ponton2 = new Ponton(2,4);
-    private Ponton ponton3 = new Ponton(3,4);
-    private Vector<Ponton> listePontons;
+    private Ponton ponton1 = new Ponton(1, 4); 
+    private Ponton ponton2 = new Ponton(2, 4);
+    private Ponton ponton3 = new Ponton(3, 4);
+    private Vector<Ponton> listePontons = new Vector();
    
     private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
     private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
@@ -77,9 +77,16 @@ public class WinHarbour extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         setIcon();
+        
+       
+        
+        System.out.println(ponton1);
+        
         listePontons.add(ponton1);
         listePontons.add(ponton2);
         listePontons.add(ponton3);
+        
+        System.out.println(listePontons);
         
     }
     
@@ -628,11 +635,11 @@ public class WinHarbour extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLireActionPerformed
 
     private void btnChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoisirActionPerformed
-        if (!"".equals(jTextFieldBateauRecu.getText()))
-        {
+        //if (!"".equals(jTextFieldBateauRecu.getText()))
+        //{
              ListeAmarrages win = new ListeAmarrages(this, true, bat, listePontons);
              win.setVisible(true);
-        } 
+        //} 
     }//GEN-LAST:event_btnChoisirActionPerformed
 
 
