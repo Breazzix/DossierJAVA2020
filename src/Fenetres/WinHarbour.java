@@ -10,12 +10,14 @@ import Classes.BateauPeche;
 import Classes.BateauPlaisance;
 import Classes.Equipage;
 import Classes.FichierConfig;
+import Classes.Ponton;
 import Classes.ShipWithoutIdentificationException;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -32,6 +34,10 @@ public class WinHarbour extends javax.swing.JFrame {
     private NetworkBasicServer serv;
     private String BateauRecu = new String();
     private static Bateau bat;
+    private Ponton ponton1 = new Ponton(1,4);
+    private Ponton ponton2 = new Ponton(2,4);
+    private Ponton ponton3 = new Ponton(3,4);
+    private Vector<Ponton> listePontons;
    
     private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
     private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
@@ -71,6 +77,9 @@ public class WinHarbour extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         setIcon();
+        listePontons.add(ponton1);
+        listePontons.add(ponton2);
+        listePontons.add(ponton3);
         
     }
     
@@ -619,14 +628,11 @@ public class WinHarbour extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLireActionPerformed
 
     private void btnChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoisirActionPerformed
-        if (bat instanceof BateauPlaisance)
+        if (!"".equals(jTextFieldBateauRecu.getText()))
         {
-            
-        }
-        else
-        {
-            
-        }
+             ListeAmarrages win = new ListeAmarrages(this, true, bat, listePontons);
+             win.setVisible(true);
+        } 
     }//GEN-LAST:event_btnChoisirActionPerformed
 
 

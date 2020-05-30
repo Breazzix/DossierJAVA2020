@@ -6,6 +6,7 @@
 package Classes;
 
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -13,12 +14,36 @@ import java.util.List;
  */
 public class Ponton extends Amarrage {
     
-    private List<MoyenDeTransportSurEau> liste;
+    private  MoyenDeTransportSurEau[] liste1;
+    private MoyenDeTransportSurEau[] liste2;
+    int nombreEmplacements;
+    int numero;
     
-    
-    public List<MoyenDeTransportSurEau> getListe() {
-        return liste;
+    public Ponton ()
+    {
+        nombreEmplacements = 4;
+        liste1 = new MoyenDeTransportSurEau[nombreEmplacements];
+        liste2 = new MoyenDeTransportSurEau[nombreEmplacements];
+        int numero = 1;
     }
+    
+    public Ponton (int num, int nb )
+    {
+        liste1 = new MoyenDeTransportSurEau[nb];
+        liste2 = new MoyenDeTransportSurEau[nb];
+        nombreEmplacements = nb;
+        numero = num;
+    }
+    
+    
+    
+    public MoyenDeTransportSurEau[] getListe(int side) {
+        if (side == 1)
+            return liste1;
+        else
+            return liste2;
+    }
+    
     // public addElement(MoyenDeTransportSurEau obj) {
     //     liste.ad
     // }
