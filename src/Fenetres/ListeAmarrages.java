@@ -66,14 +66,13 @@ public class ListeAmarrages extends javax.swing.JDialog {
                 
                 bat = (Bateau) addPonton.getListe(x)[j];
                 
-                insertTab(bat,j,"");
+                insertTab(bat,j,ponton);
                 j++;
                 
                 while (j<addPonton.getNombreEmplacements())
                 {
-                    insertTab(bat,j,ponton);
+                    insertTab(bat,j,"");
                     j++;
-                    BatEnregistre++;
                 }
                 x++;
             }
@@ -84,19 +83,19 @@ public class ListeAmarrages extends javax.swing.JDialog {
     
     private void insertTab(Bateau bateau, int emplacement, String ponton)
     {
-        Object[]data;
         if (bateau == null)
         {
-            data = {ponton,emplacement+1,"",""};
+            Object[] data = {ponton,emplacement+1,"",""};
+            modelTable.insertRow(BatEnregistre,data);
         }
         else
         {
             Object[] data = {ponton,emplacement+1,bateau.getNom(),bateau.getPortAttache()};
+            modelTable.insertRow(BatEnregistre,data);
         }
-             
-                    
-        modelTable.insertRow(BatEnregistre,data);
+        
         jTableAmarrages.setModel(modelTable);
+        BatEnregistre++;
     }
         
 
@@ -137,6 +136,11 @@ public class ListeAmarrages extends javax.swing.JDialog {
             }
         });
         jTableAmarrages.setToolTipText("");
+        jTableAmarrages.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAmarragesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableAmarrages);
 
         jLabel1.setText("Emplacement:");
@@ -202,6 +206,10 @@ public class ListeAmarrages extends javax.swing.JDialog {
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
+
+    private void jTableAmarragesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmarragesMouseClicked
+        
+    }//GEN-LAST:event_jTableAmarragesMouseClicked
 
     /**
      * @param args the command line arguments

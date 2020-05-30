@@ -78,15 +78,9 @@ public class WinHarbour extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setIcon();
         
-       
-        
-        System.out.println(ponton1);
-        
         listePontons.add(ponton1);
         listePontons.add(ponton2);
         listePontons.add(ponton3);
-        
-        System.out.println(listePontons);
         
     }
     
@@ -639,7 +633,7 @@ public class WinHarbour extends javax.swing.JFrame {
         //{
              ListeAmarrages win = new ListeAmarrages(this, true, bat, listePontons);
              win.setVisible(true);
-        //} 
+       // } 
     }//GEN-LAST:event_btnChoisirActionPerformed
 
 
