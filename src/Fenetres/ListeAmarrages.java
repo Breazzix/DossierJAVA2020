@@ -30,12 +30,14 @@ public class ListeAmarrages extends javax.swing.JDialog {
     private Object[] col = { "ponton", "emplacement", "bateau", "port d'attache" };
     private DefaultTableModel modelTable = new DefaultTableModel(col, 0);
     int BatEnregistre=0;
+    String pontonLibre;
     
     public ListeAmarrages(java.awt.Frame parent, boolean modal, Bateau bat, Vector<Ponton> listePontons) {
         super(parent, modal);
         initComponents();
         vpt = listePontons;
         AtStartUp();
+        jLabelEmplacement.setText("Ponton "+pontonLibre);
         
         if (bat instanceof BateauPeche)
         {
@@ -66,12 +68,12 @@ public class ListeAmarrages extends javax.swing.JDialog {
                 
                 bat = (Bateau) addPonton.getListe(x)[j];
                 
-                insertTab(bat,j,ponton);
+                insertTab(bat,j+1,ponton);
                 j++;
                 
                 while (j<addPonton.getNombreEmplacements())
                 {
-                    insertTab(bat,j,"");
+                    insertTab(bat,j+1,"");
                     j++;
                 }
                 x++;
@@ -85,12 +87,16 @@ public class ListeAmarrages extends javax.swing.JDialog {
     {
         if (bateau == null)
         {
-            Object[] data = {ponton,emplacement+1,"",""};
+            Object[] data = {ponton,emplacement,"",""};
             modelTable.insertRow(BatEnregistre,data);
+            
+            if (pontonLibre == null) {
+                pontonLibre =  ponton + "*" + emplacement;
+            }
         }
         else
         {
-            Object[] data = {ponton,emplacement+1,bateau.getNom(),bateau.getPortAttache()};
+            Object[] data = {ponton,emplacement,bateau.getNom(),bateau.getPortAttache()};
             modelTable.insertRow(BatEnregistre,data);
         }
         
@@ -128,7 +134,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -145,9 +151,12 @@ public class ListeAmarrages extends javax.swing.JDialog {
 
         jLabel1.setText("Emplacement:");
 
-        jLabelEmplacement.setText("Ponton");
-
         jButtonChoisir.setText("Choisir");
+        jButtonChoisir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChoisirActionPerformed(evt);
+            }
+        });
 
         jButtonAnnuler.setText("Annuler");
         jButtonAnnuler.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +198,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabelEmplacement))
+                            .addComponent(jLabelEmplacement, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAnnuler)
@@ -208,8 +217,28 @@ public class ListeAmarrages extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
     private void jTableAmarragesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmarragesMouseClicked
+        int index = jTableAmarrages.getSelectedRow();
         
+        if (jTableAmarrages.getValueAt(index,2).equals(""))
+        {
+            Object empl =  jTableAmarrages.getValueAt(index,1);
+            String ponton = (String) jTableAmarrages.getValueAt((index+1)-(int)empl,0);
+        
+            jLabelEmplacement.setText("Ponton "+ ponton + "* "+ empl.toString());
+            pontonLibre = ponton + "*"+ empl.toString();
+             System.out.println("ok");
+        }
+       
+       
     }//GEN-LAST:event_jTableAmarragesMouseClicked
+
+    private void jButtonChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChoisirActionPerformed
+       
+        
+        if (jLabelEmplacement!=null)
+            WinHarbour.setTextFieldEmplacement("P"+ pontonLibre);
+         this.dispose();
+    }//GEN-LAST:event_jButtonChoisirActionPerformed
 
     /**
      * @param args the command line arguments

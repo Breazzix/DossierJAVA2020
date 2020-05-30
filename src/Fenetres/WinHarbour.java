@@ -167,24 +167,51 @@ public class WinHarbour extends javax.swing.JFrame {
     {
         StringTokenizer st = new StringTokenizer(n, "/");
         
-        String nom = st.nextToken();
-        String Port = st.nextToken();
-        int tonnage = Integer.parseInt(st.nextToken());
-        int longueur = Integer.parseInt(st.nextToken());
-        String pav = st.nextToken();
-       
-        if ("Plaisance".equals(st.nextToken()))
-            bat = new BateauPlaisance(nom,Port,tonnage,longueur,pav,null);
+        if (st.nextToken().equals("demander"))
+        {
+            String nom = st.nextToken();
+            String Port = st.nextToken();
+            int tonnage = Integer.parseInt(st.nextToken());
+            int longueur = Integer.parseInt(st.nextToken());
+            String pav = st.nextToken();
+
+            if ("Plaisance".equals(st.nextToken()))
+                bat = new BateauPlaisance(nom,Port,tonnage,longueur,pav,new Equipage());
+            else
+            {
+                String type = st.nextToken();
+                bat = new BateauPeche(nom,Port,type,tonnage,longueur,pav,new Equipage());
+            }
+
+
+            jTextFieldBateauRecu.setText(bat.toString2());
+        }
         else
         {
-            String type = st.nextToken();
-            bat = new BateauPeche(nom,Port,type,tonnage,longueur,pav,null);
-        }
+
+            String nom = st.nextToken();
+            
+            jTextFieldBateauRecu.setText("Bateau " + nom + " est bien entré dans la rade");
+            
+            String[] arrOfStr = nom.split(" ");
+            String initiale = "";
+
             
 
-        jTextFieldBateauRecu.setText(bat.toString2());
-        
-       
+            for (int i=0; i < arrOfStr.length; i++) {
+                if (i > 1)
+                    break;
+                System.out.println(arrOfStr[i]);
+                initiale += arrOfStr[i].charAt(0);
+            }
+                 
+            jTextFieldConfirm.setText(initiale + "<--" + jTextFieldEmplacement.getText());
+        }
+    }
+    
+    public static void setTextFieldEmplacement(String emp)
+    {
+        jTextFieldEmplacement.setText(emp);
     }
 
     /**
@@ -202,9 +229,9 @@ public class WinHarbour extends javax.swing.JFrame {
         jTextFieldBateauRecu = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnChoisir = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldEmplacement = new javax.swing.JTextField();
         btnEnvoyerChoix = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldConfirm = new javax.swing.JTextField();
         btnEnvoyerConfirm = new javax.swing.JButton();
         jLabelImage1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -265,8 +292,18 @@ public class WinHarbour extends javax.swing.JFrame {
         });
 
         btnEnvoyerChoix.setText("Envoyer Choix");
+        btnEnvoyerChoix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnvoyerChoixActionPerformed(evt);
+            }
+        });
 
         btnEnvoyerConfirm.setText("Envoyer confirmation");
+        btnEnvoyerConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnvoyerConfirmActionPerformed(evt);
+            }
+        });
 
         jLabelImage1.setText("jLabel2");
 
@@ -357,13 +394,13 @@ public class WinHarbour extends javax.swing.JFrame {
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldBateauRecu)
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldEmplacement, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEnvoyerChoix)
                                 .addGap(26, 26, 26)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnEnvoyerConfirm)
                                         .addGap(0, 106, Short.MAX_VALUE))
@@ -391,9 +428,9 @@ public class WinHarbour extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnChoisir)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEmplacement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEnvoyerChoix)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEnvoyerConfirm))
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
@@ -589,10 +626,10 @@ public class WinHarbour extends javax.swing.JFrame {
 
     DefaultListModel listModel = new DefaultListModel<>();
     private void btnBateauAmarreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBateauAmarreActionPerformed
-        WinBateauAmarre win = new WinBateauAmarre(this, true, bateau);
+        WinBateauAmarre win = new WinBateauAmarre(this, true, bat);
         win.setVisible(true);
 
-        listModel.addElement(bateau);
+        listModel.addElement(bat + jTextFieldConfirm.getText());
         this.listBatEntree.setModel(listModel);
 
         
@@ -608,24 +645,15 @@ public class WinHarbour extends javax.swing.JFrame {
     }//GEN-LAST:event_btnServeurActionPerformed
 
     private void btnLireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLireActionPerformed
-        BateauRecu = serv.getMessage();
-        try {
-          setBatLu(BateauRecu);  
-        } catch (ShipWithoutIdentificationException e) {
-            System.out.println("Nom bateau inconnu");
-        }
-        
-           /* if(!NewsRecue.equals("RIEN"))
-            {
-                newsevent.setNews(NewsRecue);
-                newsevent.setLocalite("Charleroi");
-                listenewsbean.newsDetected(newsevent);
-                notificationNewsDetected(listenewsbean.getNotifyNewsEvent());
+        if (jCheckReqAtt.isSelected())
+        {
+            BateauRecu = serv.getMessage();
+            try {
+              setBatLu(BateauRecu);  
+            } catch (ShipWithoutIdentificationException e) {
+                System.out.println("Nom bateau inconnu");
             }
-            else
-            {
-                setNewsLue(NewsRecue);
-            }*/
+        }
     }//GEN-LAST:event_btnLireActionPerformed
 
     private void btnChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoisirActionPerformed
@@ -635,6 +663,14 @@ public class WinHarbour extends javax.swing.JFrame {
              win.setVisible(true);
        // } 
     }//GEN-LAST:event_btnChoisirActionPerformed
+
+    private void btnEnvoyerChoixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvoyerChoixActionPerformed
+        serv.sendMessage(jTextFieldEmplacement.getText());
+    }//GEN-LAST:event_btnEnvoyerChoixActionPerformed
+
+    private void btnEnvoyerConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvoyerConfirmActionPerformed
+        serv.sendMessage(jTextFieldConfirm.getText());
+    }//GEN-LAST:event_btnEnvoyerConfirmActionPerformed
 
 
 
@@ -696,9 +732,9 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private static javax.swing.JTextField jTextFieldBateauRecu;
+    private static javax.swing.JTextField jTextFieldConfirm;
+    public static javax.swing.JTextField jTextFieldEmplacement;
     private javax.swing.JList listBatEntree;
     private javax.swing.JMenuItem mItmAide;
     private javax.swing.JMenuItem mItmAuteur;

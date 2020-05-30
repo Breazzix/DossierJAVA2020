@@ -71,8 +71,8 @@ public class Applic_Phare extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jLabelEntre = new javax.swing.JLabel();
+        jButtonBatEntre = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabelRep = new javax.swing.JLabel();
@@ -86,18 +86,24 @@ public class Applic_Phare extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonConnect = new javax.swing.JButton();
         jLabeImage = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMitmLogin = new javax.swing.JMenuItem();
-        jMitmLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel4.setText("??");
+        jLabelEntre.setText("??");
 
-        jButton4.setText("Bateau entré dans la rade");
+        jButtonBatEntre.setText("Bateau entré dans la rade");
+        jButtonBatEntre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBatEntreActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Se déconnecter du serveur");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("RAZ");
 
@@ -164,9 +170,9 @@ public class Applic_Phare extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jLabelRep, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(jButtonBatEntre)
                         .addGap(55, 55, 55)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelEntre, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -205,7 +211,7 @@ public class Applic_Phare extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonSuivant))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldBateauid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,24 +224,12 @@ public class Applic_Phare extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jLabel4))
+                    .addComponent(jButtonBatEntre)
+                    .addComponent(jLabelEntre))
                 .addGap(12, 12, 12)
                 .addComponent(jButton3)
                 .addGap(57, 57, 57))
         );
-
-        jMenu1.setText("Utilisateur");
-
-        jMitmLogin.setText("Login");
-        jMenu1.add(jMitmLogin);
-
-        jMitmLogout.setText("Logout");
-        jMenu1.add(jMitmLogout);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,34 +263,39 @@ public class Applic_Phare extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-          Envoyer();  
+          Envoyer("demander");  
         } catch (BaseException e) {
             Logger.getLogger(Applic_Phare.class.getName()).log(Level.SEVERE, null, e);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonBatEntreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatEntreActionPerformed
+        try {
+          Envoyer("entre");  
+        } catch (BaseException e) {
+            Logger.getLogger(Applic_Phare.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jButtonBatEntreActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
     
-    public void Envoyer() throws BaseException
+    public void Envoyer(String type) throws BaseException
     {
+        
         if(client != null)
         {
             if ("??".equals(jTextFieldBateauid.getText()))
                 throw new BaseException(this, "aucun bateau n'a été identifié");
             else
             {
-                Bateau BatTmp = (Bateau) modelBat.elementAt(0);
                 String tmp = null;
-                tmp = BatTmp.getNom() + "/" + BatTmp.getPortAttache()+ "/" + BatTmp.getTonnage() + "/" + BatTmp.getLongueur() + "/" + BatTmp.getPavillon() + "/" + BatTmp.getEquipage() + "/";
-                if (BatTmp instanceof BateauPlaisance)
-                    tmp = "Plaisance" + tmp;
+                if ("demander".equals(type))
+                    demander();
                 else
-                {
-                    BateauPeche BatPeche = (BateauPeche) BatTmp;
-                    tmp = "Peche" + tmp + BatPeche.getType();
-                }
-                    
-
-                String reponse = client.sendString(tmp);
+                    entrer();
             }
            
         }
@@ -305,6 +304,38 @@ public class Applic_Phare extends javax.swing.JFrame {
            throw new BaseException(this, "Le client n'est pas connecté au serveur !");
         }
          
+    }
+    
+    public void demander() {
+        Bateau BatTmp = (Bateau) modelBat.elementAt(0);
+        String tmp = null;
+        tmp = BatTmp.getNom() + "/" + BatTmp.getPortAttache()+ "/" + BatTmp.getTonnage() + "/" + BatTmp.getLongueur() + "/" + BatTmp.getPavillon() + "/" + BatTmp.getEquipage() + "/";
+        if (BatTmp instanceof BateauPlaisance)
+            tmp = tmp + "Plaisance" ;
+        else
+        {
+            BateauPeche BatPeche = (BateauPeche) BatTmp;
+            tmp =  tmp + BatPeche.getType() + "Peche";
+            
+        }
+        
+        tmp = "demander/" + tmp;
+        
+        String reponse = client.sendString(tmp);
+        jLabelRep.setText(reponse);
+    }
+    
+    public void entrer() {
+        
+        String tmp=null;
+        
+        Bateau BatTmp = (Bateau) modelBat.elementAt(0);
+        
+        
+        tmp = "entre/" + BatTmp.getNom();
+       
+        String reponse = client.sendString(tmp);
+        jLabelEntre.setText(reponse);
     }
     /**
      * @param args the command line arguments
@@ -345,20 +376,16 @@ public class Applic_Phare extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonBatEntre;
     private javax.swing.JButton jButtonConnect;
     private javax.swing.JButton jButtonSuivant;
     private javax.swing.JLabel jLabeImage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelEntre;
     private javax.swing.JLabel jLabelRep;
     private javax.swing.JList jListBateau;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMitmLogin;
-    private javax.swing.JMenuItem jMitmLogout;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextField jTextFieldBateauid;

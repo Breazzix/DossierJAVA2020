@@ -29,7 +29,7 @@ public class BateauPlaisance extends Bateau{
     
     @Override
     public String toString() { 
-        return String.format("Plaisance" + " | " + this.getPavillon());
+        return String.format(this.getNom()+ "--Plaisance" + "--"+this.getPavillon()+"-->");
     }
     
 }

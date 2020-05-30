@@ -31,7 +31,7 @@ public class BateauPeche extends Bateau{
     
     @Override
     public String toString() { 
-        return String.format("Peche" + " | " + this.getPavillon());
+        return String.format(this.getNom()+ "--Peche" + "--"+this.getPavillon()+"-->");
     }
     
 }
