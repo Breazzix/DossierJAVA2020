@@ -10,6 +10,19 @@ import Classes.Bateau;
 import Classes.BateauPeche;
 import Classes.BateauPlaisance;;
 import Classes.FichierConfig;
+import JavaBeans.BoatBean;
+import JavaBeans.BoatEvent;
+import JavaBeans.BoatListener;
+import JavaBeans.KindOfBoatBean;
+import JavaBeans.ThreadRandomGenerator;
+import JavaBeans.UtilisateurNombre;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import network.*;import Classes.FichierConfig;
+import JavaBeans.BoatBean;
+import JavaBeans.BoatListener;
 import JavaBeans.KindOfBoatBean;
 import JavaBeans.ThreadRandomGenerator;
 import JavaBeans.UtilisateurNombre;
@@ -23,7 +36,7 @@ import network.*;
  *
  * @author vange
  */
-public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombre{
+public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombre, BoatListener{
 
     /**
      * Creates new form Applic_Phare
@@ -405,6 +418,12 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
 
     @Override
     public void traiteNombre(int n) {
-        KindOfBoatBean kob = new KindOfBoatBean();
+        BoatBean bb = new BoatBean();
+        bb.addBoatListener(this);
+    }
+
+    @Override
+    public void BoatDetected(BoatEvent e) {
+        System.out.println("CA MARCHE!");
     }
 }

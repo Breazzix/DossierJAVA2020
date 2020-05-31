@@ -5,6 +5,7 @@
  */
 package JavaBeans;
 
+import java.util.Date;
 import java.util.EventObject;
 
 /**
@@ -12,9 +13,30 @@ import java.util.EventObject;
  * @author ASUS7
  */
 public class BoatEvent extends EventObject {
+    
+    String type;
+    String pavillon;
+    Date date;
 
-    public BoatEvent(Object source) {
+    public BoatEvent(Object source,String t, String pav, Date d) {
         super(source);
+        type = t;
+        pavillon = pav;
+        date = d;
     }
     
+    public String getType()
+    {
+        return type;
+    }
+    
+    public String getPavillon()
+    {
+        return pavillon;
+    }
+    
+    public Date getDate()
+    {
+        return date;
+    }
 }
