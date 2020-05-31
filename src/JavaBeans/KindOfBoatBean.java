@@ -31,6 +31,10 @@ public class KindOfBoatBean implements UtilisateurNombre{
         GestProp.firePropertyChange("info",ancienInfo,type);
     }
     
+    public String getInfo() {
+        return this.info;
+    }
+    
     public void addPropertyChangeListener(PropertyChangeListener l) {
         GestProp.addPropertyChangeListener(l);
     }
