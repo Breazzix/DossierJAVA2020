@@ -12,11 +12,17 @@ package JavaBeans;
 public class KindOfBoatBean implements UtilisateurNombre{
     
     String info;
+    ThreadRandomGenerator tdrdg;
     
     public KindOfBoatBean ()
     {
-        ThreadRandomGenerator tdrdg = new ThreadRandomGenerator(this, 1, 500, 5, 2);
+        tdrdg = new ThreadRandomGenerator(this, 1, 500, 1, 2);
         tdrdg.start();
+    }
+    
+    public void setInfo(String type)
+    {
+        info=type;
     }
     
     @Override
@@ -26,7 +32,18 @@ public class KindOfBoatBean implements UtilisateurNombre{
 
     @Override
     public void traiteNombre(int n) {
-        
+        if (n%7==0)
+        {
+            setInfo("Plaisance");
+            tdrdg.setEnMarche(false);
+            System.out.println("plaisance trouvé");
+        }
+        else if (n%17==0)
+        {
+            setInfo("Peche");
+            tdrdg.setEnMarche(false);
+            System.out.println("peche trouvé");
+        }
     }
     
 }

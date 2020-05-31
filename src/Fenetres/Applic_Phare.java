@@ -10,6 +10,8 @@ import Classes.Bateau;
 import Classes.BateauPeche;
 import Classes.BateauPlaisance;;
 import Classes.FichierConfig;
+import JavaBeans.KindOfBoatBean;
+import JavaBeans.ThreadRandomGenerator;
 import JavaBeans.UtilisateurNombre;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +37,8 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         setIcon();
         start();
         
-        
+        ThreadRandomGenerator tdrdg = new ThreadRandomGenerator(this, 1, 500, 5, 2);
+        tdrdg.start();
     }
     
     public final void setIcon()
@@ -402,6 +405,6 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
 
     @Override
     public void traiteNombre(int n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        KindOfBoatBean kob = new KindOfBoatBean();
     }
 }

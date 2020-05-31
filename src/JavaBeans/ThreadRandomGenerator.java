@@ -13,25 +13,27 @@ public class ThreadRandomGenerator extends java.lang.Thread{
     private UtilisateurNombre utilisateurThread;
     private int borneInferieure, borneSuperieure, multipleDeclenchement, tempsPause;
     private int nombreProduit;
+    private boolean enMarche;
     
     public ThreadRandomGenerator(UtilisateurNombre un, int bi, int bs, int md, int tp)
     {
         utilisateurThread = un; borneInferieure=bi; borneSuperieure=bs;
         multipleDeclenchement = md; tempsPause = tp; nombreProduit = -1;
+        setEnMarche(true);
     }
     public void run()
     {
         Double dr;
-        while (true)
+        while (isEnMarche()==true)
         {
             dr = new Double(borneInferieure +
             Math.random()*(borneSuperieure - borneInferieure));
             nombreProduit = dr.intValue();
-            System.out.println(utilisateurThread.getIdentifiant() +
+            System.out.println(/*utilisateurThread.getIdentifiant() +*/
                     "> nombreProduit = " + nombreProduit);
             if (nombreProduit % multipleDeclenchement == 0)
             {
-                System.out.println(utilisateurThread.getIdentifiant() +
+                System.out.println(/*utilisateurThread.getIdentifiant() +*/
                         "> -------------- !!!!!!! " + nombreProduit + "!!!!");
                 utilisateurThread.traiteNombre(nombreProduit);
             }
@@ -45,4 +47,10 @@ public class ThreadRandomGenerator extends java.lang.Thread{
             }
         }
     }
+    
+    public boolean isEnMarche(){return enMarche;}
+    public void setEnMarche(boolean em)
+    {
+        enMarche = em;
+    }      
 }
