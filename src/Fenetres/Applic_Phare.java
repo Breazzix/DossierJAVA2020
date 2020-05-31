@@ -10,6 +10,7 @@ import Classes.Bateau;
 import Classes.BateauPeche;
 import Classes.BateauPlaisance;;
 import Classes.FichierConfig;
+import JavaBeans.UtilisateurNombre;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -20,7 +21,7 @@ import network.*;
  *
  * @author vange
  */
-public class Applic_Phare extends javax.swing.JFrame {
+public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombre{
 
     /**
      * Creates new form Applic_Phare
@@ -33,6 +34,8 @@ public class Applic_Phare extends javax.swing.JFrame {
         initComponents();
         setIcon();
         start();
+        
+        
     }
     
     public final void setIcon()
@@ -50,9 +53,9 @@ public class Applic_Phare extends javax.swing.JFrame {
         BateauPeche bateauP2 = new BateauPeche("RoYog", "Anvers","thonier",120, 80, "Anvers", null);
         
         jListBateau.setModel(modelBat);
-        modelBat.addElement(bateauP1);
-        modelBat.addElement(bateauPl1);
-        modelBat.addElement(bateauP2);
+        modelBat.addElement(bateauP1.getNom() + "/" + bateauP1.getPavillon());
+        modelBat.addElement(bateauPl1.getNom() + "/" + bateauPl1.getPavillon());
+        modelBat.addElement(bateauP2.getNom() + "/" + bateauP2.getPavillon());
     }
     
     public static void setjTextFieldBateauId(Bateau bat)
@@ -279,7 +282,8 @@ public class Applic_Phare extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBatEntreActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        client.setEndSending();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
     
     public void Envoyer(String type) throws BaseException
@@ -390,4 +394,14 @@ public class Applic_Phare extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextField jTextFieldBateauid;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public String getIdentifiant() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void traiteNombre(int n) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -213,7 +213,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
     private void jTableAmarragesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmarragesMouseClicked

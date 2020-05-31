@@ -242,7 +242,6 @@ public class WinHarbour extends javax.swing.JFrame {
         datePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel_DATE = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jCheckReqAtt = new javax.swing.JCheckBox();
         mainMenuBar = new javax.swing.JMenuBar();
         menuUtilisateur = new javax.swing.JMenu();
@@ -319,6 +318,11 @@ public class WinHarbour extends javax.swing.JFrame {
         });
 
         jButton1.setText("Arrêter le serveur");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Nous sommes le :");
 
@@ -341,17 +345,6 @@ public class WinHarbour extends javax.swing.JFrame {
                     .addComponent(jLabel_DATE)
                     .addComponent(jLabel4))
                 .addGap(0, 13, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         jCheckReqAtt.setText("Requête en attente");
@@ -406,11 +399,6 @@ public class WinHarbour extends javax.swing.JFrame {
                                         .addGap(0, 106, Short.MAX_VALUE))
                                     .addComponent(jScrollPane1))))
                         .addContainerGap())))
-            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(mainPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,11 +432,6 @@ public class WinHarbour extends javax.swing.JFrame {
                         .addComponent(jButton1))
                     .addComponent(jLabelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(mainPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         menuUtilisateur.setText("Utilisateur");
@@ -657,11 +640,11 @@ public class WinHarbour extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLireActionPerformed
 
     private void btnChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoisirActionPerformed
-        //if (!"".equals(jTextFieldBateauRecu.getText()))
-        //{
+        if (!"".equals(jTextFieldBateauRecu.getText()))
+        {
              ListeAmarrages win = new ListeAmarrages(this, true, bat, listePontons);
              win.setVisible(true);
-       // } 
+        } 
     }//GEN-LAST:event_btnChoisirActionPerformed
 
     private void btnEnvoyerChoixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvoyerChoixActionPerformed
@@ -671,6 +654,12 @@ public class WinHarbour extends javax.swing.JFrame {
     private void btnEnvoyerConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvoyerConfirmActionPerformed
         serv.sendMessage(jTextFieldConfirm.getText());
     }//GEN-LAST:event_btnEnvoyerConfirmActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        serv.setEndReceiving();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
 
@@ -730,7 +719,6 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextField jTextFieldBateauRecu;
     private static javax.swing.JTextField jTextFieldConfirm;
