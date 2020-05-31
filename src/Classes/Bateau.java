@@ -54,6 +54,11 @@ public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant {
         this.pavillon = b.getPavillon();
 
     }
+    
+    public Bateau (String pav)
+    {
+        setPavillon(pav);
+    }
 
     public final void setNom(String name) throws ShipWithoutIdentificationException {
         if (name == null)

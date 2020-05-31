@@ -18,6 +18,10 @@ public class BateauPeche extends Bateau{
     }
 
     private String type;
+
+    public BateauPeche(String pavillon) {
+        super(pavillon);
+    }
     
     public final void setType(String t)
     {
@@ -31,7 +35,10 @@ public class BateauPeche extends Bateau{
     
     @Override
     public String toString() { 
-        return String.format(this.getNom()+ "--Peche" + "--"+this.getPavillon()+"-->");
+        return String.format("Peche/"+this.getPavillon());
     }
+   /* public String toString() { 
+        return String.format(this.getNom()+ "--Peche" + "--"+this.getPavillon()+"-->");
+    }*/
     
 }

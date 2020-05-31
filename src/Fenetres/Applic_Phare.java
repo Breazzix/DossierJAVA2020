@@ -24,6 +24,7 @@ import network.*;import Classes.FichierConfig;
 import JavaBeans.BoatBean;
 import JavaBeans.BoatListener;
 import JavaBeans.KindOfBoatBean;
+import JavaBeans.NotifyBean;
 import JavaBeans.ThreadRandomGenerator;
 import JavaBeans.UtilisateurNombre;
 import java.util.logging.Level;
@@ -36,7 +37,7 @@ import network.*;
  *
  * @author vange
  */
-public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombre, BoatListener{
+public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombre{
 
     /**
      * Creates new form Applic_Phare
@@ -48,7 +49,6 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     public Applic_Phare() {
         initComponents();
         setIcon();
-        start();
         
         ThreadRandomGenerator tdrdg = new ThreadRandomGenerator(this, 1, 500, 5, 2);
         tdrdg.start();
@@ -62,16 +62,10 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         jLabeImage.setIcon(image);
     }
     
-    public void start()
+    public static void addList(Bateau bat)
     {
-        BateauPeche bateauP1 = new BateauPeche("Black Pearl", "Caraibes","thonier", 30, 50, "Tortuga", null);
-        BateauPlaisance bateauPl1 = new BateauPlaisance("Warren", "Monaco", 50, 70, "UK", null);
-        BateauPeche bateauP2 = new BateauPeche("RoYog", "Anvers","thonier",120, 80, "Anvers", null);
-        
         jListBateau.setModel(modelBat);
-        modelBat.addElement(bateauP1.getNom() + "/" + bateauP1.getPavillon());
-        modelBat.addElement(bateauPl1.getNom() + "/" + bateauPl1.getPavillon());
-        modelBat.addElement(bateauP2.getNom() + "/" + bateauP2.getPavillon());
+        modelBat.addElement(bat);
     }
     
     public static void setjTextFieldBateauId(Bateau bat)
@@ -147,11 +141,6 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
 
         jLabel2.setText("Bateau identifié:");
 
-        jListBateau.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jListBateau);
 
         jButtonSuivant.setText("Suivant");
@@ -405,7 +394,7 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelEntre;
     private javax.swing.JLabel jLabelRep;
-    private javax.swing.JList jListBateau;
+    private static javax.swing.JList jListBateau;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextField jTextFieldBateauid;
@@ -419,11 +408,9 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     @Override
     public void traiteNombre(int n) {
         BoatBean bb = new BoatBean();
-        bb.addBoatListener(this);
+        NotifyBean nb = new NotifyBean(this);
+        bb.addBoatListener(nb);
     }
 
-    @Override
-    public void BoatDetected(BoatEvent e) {
-        System.out.println("CA MARCHE!");
-    }
+    
 }

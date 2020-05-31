@@ -49,7 +49,6 @@ public class BoatBean implements PropertyChangeListener{
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         notifyBoatDetected();
-        System.out.println("okkkk");
     }
     
 }
