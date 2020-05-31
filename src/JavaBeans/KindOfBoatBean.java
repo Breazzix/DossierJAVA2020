@@ -5,6 +5,9 @@
  */
 package JavaBeans;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 /**
  *
  * @author vange
@@ -13,6 +16,7 @@ public class KindOfBoatBean implements UtilisateurNombre{
     
     String info;
     ThreadRandomGenerator tdrdg;
+    protected PropertyChangeSupport GestProp = new PropertyChangeSupport(this);
     
     public KindOfBoatBean ()
     {
@@ -22,7 +26,13 @@ public class KindOfBoatBean implements UtilisateurNombre{
     
     public void setInfo(String type)
     {
+        String ancienInfo = info;
         info=type;
+        GestProp.firePropertyChange("info",ancienInfo,type);
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l) {
+        GestProp.addPropertyChangeListener(l);
     }
     
     @Override
