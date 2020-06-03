@@ -249,10 +249,10 @@ public class WinHarbour extends javax.swing.JFrame {
         mItmLogout = new javax.swing.JMenuItem();
         mItmNouveau = new javax.swing.JMenuItem();
         menuAmarrages = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuAmmPlaisance = new javax.swing.JMenuItem();
+        jMenuAmmPeche = new javax.swing.JMenuItem();
         menuBateaux = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuIListComp = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         menuPersonnel = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -464,18 +464,28 @@ public class WinHarbour extends javax.swing.JFrame {
 
         menuAmarrages.setText("Amarrages");
 
-        jMenuItem1.setText("Plaisance");
-        menuAmarrages.add(jMenuItem1);
+        jMenuAmmPlaisance.setText("Plaisance");
+        jMenuAmmPlaisance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAmmPlaisanceActionPerformed(evt);
+            }
+        });
+        menuAmarrages.add(jMenuAmmPlaisance);
 
-        jMenuItem2.setText("Peche");
-        menuAmarrages.add(jMenuItem2);
+        jMenuAmmPeche.setText("Peche");
+        jMenuAmmPeche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAmmPecheActionPerformed(evt);
+            }
+        });
+        menuAmarrages.add(jMenuAmmPeche);
 
         mainMenuBar.add(menuAmarrages);
 
         menuBateaux.setText("Bateaux");
 
-        jMenuItem3.setText("Liste complete");
-        menuBateaux.add(jMenuItem3);
+        jMenuIListComp.setText("Liste complete");
+        menuBateaux.add(jMenuIListComp);
 
         jMenuItem4.setText("Rechercher un bateau");
         menuBateaux.add(jMenuItem4);
@@ -642,7 +652,12 @@ public class WinHarbour extends javax.swing.JFrame {
     private void btnChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoisirActionPerformed
         if (!"".equals(jTextFieldBateauRecu.getText()))
         {
-             ListeAmarrages win = new ListeAmarrages(this, true, bat, listePontons);
+            String titre;
+            if (bat instanceof BateauPeche)
+                   titre = "Peche";
+            else
+                   titre = "Plaisance";
+             ListeAmarrages win = new ListeAmarrages(this, true, titre, listePontons, false);
              win.setVisible(true);
         } 
     }//GEN-LAST:event_btnChoisirActionPerformed
@@ -660,6 +675,16 @@ public class WinHarbour extends javax.swing.JFrame {
         serv.setEndReceiving();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuAmmPlaisanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAmmPlaisanceActionPerformed
+       ListeAmarrages lam = new ListeAmarrages(this, true, "Plaisance", listePontons, true);
+       lam.setVisible(true);
+    }//GEN-LAST:event_jMenuAmmPlaisanceActionPerformed
+
+    private void jMenuAmmPecheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAmmPecheActionPerformed
+        ListeAmarrages lam = new ListeAmarrages(this, true, "Peche", listePontons, true);
+       lam.setVisible(true);
+    }//GEN-LAST:event_jMenuAmmPecheActionPerformed
 
 
 
@@ -713,9 +738,9 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelImage1;
     private static javax.swing.JLabel jLabel_DATE;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuAmmPeche;
+    private javax.swing.JMenuItem jMenuAmmPlaisance;
+    private javax.swing.JMenuItem jMenuIListComp;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

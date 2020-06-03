@@ -7,6 +7,7 @@ package Fenetres;
 
 import Classes.Bateau;
 import Classes.BateauPeche;
+import Classes.BateauPlaisance;
 import Classes.Ponton;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -31,24 +32,32 @@ public class ListeAmarrages extends javax.swing.JDialog {
     private DefaultTableModel modelTable = new DefaultTableModel(col, 0);
     int BatEnregistre=0;
     String pontonLibre;
+    boolean isChoix;
+    String typeBat;
     
-    public ListeAmarrages(java.awt.Frame parent, boolean modal, Bateau bat, Vector<Ponton> listePontons) {
+    public ListeAmarrages(java.awt.Frame parent, boolean modal, String titre, Vector<Ponton> listePontons, boolean isAffiche) {
         super(parent, modal);
         initComponents();
         vpt = listePontons;
-        AtStartUp();
-        jLabelEmplacement.setText("Ponton "+pontonLibre);
+        typeBat = titre;
         
-        if (bat instanceof BateauPeche)
-        {
-            setTitle("Capitainerie-Peche: Liste des amarrages");
+        
+        setTitle("Capitainerie-" +  titre + ": Liste des amarrages");
+        
+        isChoix = isAffiche;
+        if (isAffiche) {
+            jButtonChoisir.setText("OK");
+            creeTabAffiche(listePontons);
+        }
+        else {
+            AtStartUp();
+            jLabelEmplacement.setText("Ponton "+pontonLibre);
+        }
             
-        }
-        else
-        {
-            setTitle("Capitainerie-Plaisance: Liste des amarrages");
-        }
+        
     }
+    
+    
     
     private void AtStartUp(){
         Ponton addPonton;
@@ -62,7 +71,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
         while(enm.hasMoreElements()){
             addPonton = vpt.get(i);
             x=1;
-            while (x<=2){
+            while (x <= 2) {
                 ponton = String.valueOf(addPonton.getNumero()) + x;
                 j=0;
                 
@@ -81,6 +90,49 @@ public class ListeAmarrages extends javax.swing.JDialog {
             i++;
             enm.nextElement();
         }
+    }
+    
+    private void creeTabAffiche(Vector<Ponton> list) {
+        Enumeration enm = list.elements();
+        Bateau bat;
+        
+        for (int i = 0; enm.hasMoreElements(); i++) {
+            Ponton unPonton = (Ponton) enm.nextElement();
+            for (int j = 0; j < 2; j++) {
+                String numPonton = String.valueOf(unPonton.getNumero()) + (j + 1);
+                
+                int k = 0;
+                bat = (Bateau) unPonton.getListe(i + 1)[k];
+                k++;
+                insertBatDansTab(bat, k + 1, numPonton);
+                
+                for (; k < unPonton.getNombreEmplacements(); k++) {
+                    insertBatDansTab(bat, k + 1, "");
+                }
+            }
+        }
+    }
+    
+    private void insertBatDansTab(Bateau bateau, int emplacement, String ponton) {
+        if (bateau != null) {
+            if ( isBateauPlaisance(bateau)) {
+                Object[] data = {ponton,emplacement,bateau.getNom(),bateau.getPortAttache()};
+                modelTable.insertRow(BatEnregistre,data);
+                 jTableAmarrages.setModel(modelTable);
+                BatEnregistre++;        
+            }
+        }
+        
+    }
+    
+    private boolean isBateauPlaisance(Bateau bateau) {
+        boolean type = false;
+        if ("Plaisance".equals(typeBat) && bateau instanceof BateauPlaisance)
+            type = true;
+        else if ("Peche".equals(typeBat) && bateau instanceof BateauPeche)
+            type = true;
+        
+        return type;
     }
     
     private void insertTab(Bateau bateau, int emplacement, String ponton)
@@ -103,6 +155,9 @@ public class ListeAmarrages extends javax.swing.JDialog {
         jTableAmarrages.setModel(modelTable);
         BatEnregistre++;
     }
+    
+    
+    
         
 
     /**
@@ -233,11 +288,13 @@ public class ListeAmarrages extends javax.swing.JDialog {
     }//GEN-LAST:event_jTableAmarragesMouseClicked
 
     private void jButtonChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChoisirActionPerformed
-       
-        
-        if (jLabelEmplacement!=null)
-            WinHarbour.setTextFieldEmplacement("P"+ pontonLibre);
+               
+        if (isChoix) {
+             if (jLabelEmplacement!=null)
+                WinHarbour.setTextFieldEmplacement("P"+ pontonLibre);
+        }
          this.dispose();
+       
     }//GEN-LAST:event_jButtonChoisirActionPerformed
 
     /**
@@ -270,7 +327,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ListeAmarrages dialog = new ListeAmarrages(new javax.swing.JFrame(), true, null, null);
+                ListeAmarrages dialog = new ListeAmarrages(new javax.swing.JFrame(), true, null, null, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
