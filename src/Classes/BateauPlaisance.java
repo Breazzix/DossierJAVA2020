@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import java.util.Date;
+
 /**
  *
  * @author vange
@@ -27,8 +29,8 @@ public class BateauPlaisance extends Bateau{
         return typePermis;
     }
     
-    public BateauPlaisance(String pavillon) {
-        super(pavillon);
+    public BateauPlaisance(String pavillon, Date d) {
+        super(pavillon, d);
     }
     
     @Override

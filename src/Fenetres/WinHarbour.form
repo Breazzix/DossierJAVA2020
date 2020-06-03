@@ -67,8 +67,11 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Liste complete"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuIListCompActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuRechBat">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Rechercher un bateau"/>
               </Properties>

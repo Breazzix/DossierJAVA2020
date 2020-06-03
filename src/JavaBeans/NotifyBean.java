@@ -29,15 +29,15 @@ public class NotifyBean implements BoatListener{
         BateauArrive win = new BateauArrive(applic, true);
         win.setVisible(true);
         
-        Bateau bat = null;
+        Bateau bat;
         
         if ("Peche".equals(e.getType()))
         {
-            bat = new BateauPeche(e.getPavillon());
+            bat = new BateauPeche(e.getPavillon(), e.getDate());
         }
         else
         {
-            bat = new BateauPlaisance(e.getPavillon());
+            bat = new BateauPlaisance(e.getPavillon(), e.getDate());
         }
         Applic_Phare.addList(bat);
     }

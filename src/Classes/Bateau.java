@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import java.util.Date;
+
 /**
  *
  * @author vange
@@ -16,61 +18,52 @@ public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant {
     private int longueur;
     private String pavillon;
     private Equipage equipage;
+    private Date dateArriver;
 
     public Bateau() {
-        
-        try {
-            setNom("inconnu");
-            setPortAttache("inconnu");
-            setTonnage(0);
-            setLongueur(0);
-            setPavillon("inconnu");
-            equipage = new Equipage();
-        } catch (ShipWithoutIdentificationException e) {
-            System.out.println(e.getMessage());
-        }
-
+        setNom("");
+        setPortAttache("");
+        setTonnage(0);
+        setLongueur(0);
+        setPavillon("");
+        equipage = new Equipage();
     }
 
     public Bateau(String name, String port, int tonnes, int lg, String nationalite, Equipage equip) {
-        try {
-            setNom(name);
-            setPortAttache(port);
-            setTonnage(tonnes);
-            setLongueur(lg);
-            setPavillon(nationalite);
-            setEquipage(equip);
-        } catch (ShipWithoutIdentificationException e) {
-            System.out.println(e.getMessage());
-        }
-
+        setNom(name);
+        setPortAttache(port);
+        setTonnage(tonnes);
+        setLongueur(lg);
+        setPavillon(nationalite);
+        setEquipage(equip);
     }
+    
 
-    public Bateau(Bateau b) {
+    /*public Bateau(Bateau b) {
         this.nom = b.getNom();
         this.portAttache = b.getPortAttache();
         this.tonnage = b.getTonnage();
         this.longueur = b.getLongueur();
         this.pavillon = b.getPavillon();
 
-    }
+    } */
     
-    public Bateau (String pav)
+    public Bateau (String pav, Date d)
     {
-        setPavillon(pav);
+        setNom("");
+        setPortAttache("");
+        setTonnage(0);
+        setLongueur(0);
+        setPavillon("");
+        setDateArriver(d);
+        equipage = new Equipage();
     }
 
-    public final void setNom(String name) throws ShipWithoutIdentificationException {
-        if (name == null)
-            throw new ShipWithoutIdentificationException("Nom manquant !");
-        else
+    public final void setNom(String name) {
             nom = name;
     }
 
-    public final void setPortAttache(String port) throws ShipWithoutIdentificationException {
-        if (port == null)
-            throw new ShipWithoutIdentificationException("Port d'attache manquant !");
-        else
+    public final void setPortAttache(String port) {
             this.portAttache = port;
     }
 
@@ -138,6 +131,20 @@ public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant {
     
      public String toString2() { 
         return String.format(this.getNom() + " / " + this.getLongueur()+ "m");
+    }
+
+    /**
+     * @return the dateArriver
+     */
+    public Date getDateArriver() {
+        return dateArriver;
+    }
+
+    /**
+     * @param dateArriver the dateArriver to set
+     */
+    public void setDateArriver(Date dateArriver) {
+        this.dateArriver = dateArriver;
     }
 
 

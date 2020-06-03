@@ -30,7 +30,8 @@ public class ListesBateaux extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
        
-        createListBatAmarre(listePontons);
+        if (listePontons != null)
+            createListBatAmarre(listePontons);
     }
     
     private void createListBatAmarre(Vector<Ponton> list) {
@@ -78,6 +79,7 @@ public class ListesBateaux extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableBateaux = new javax.swing.JTable();
+        jBtnOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -101,6 +103,13 @@ public class ListesBateaux extends javax.swing.JDialog {
         jTableBateaux.setToolTipText("");
         jScrollPane1.setViewportView(jTableBateaux);
 
+        jBtnOk.setText("Ok");
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,17 +118,27 @@ public class ListesBateaux extends javax.swing.JDialog {
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1)
                 .addGap(52, 52, 52))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jBtnOk)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(jBtnOk)
+                .addGap(38, 38, 38))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBtnOkActionPerformed
 
     
     /**
@@ -165,6 +184,7 @@ public class ListesBateaux extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnOk;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableBateaux;
     // End of variables declaration//GEN-END:variables

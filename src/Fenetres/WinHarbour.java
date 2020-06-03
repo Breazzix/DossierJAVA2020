@@ -253,7 +253,7 @@ public class WinHarbour extends javax.swing.JFrame {
         jMenuAmmPeche = new javax.swing.JMenuItem();
         menuBateaux = new javax.swing.JMenu();
         jMenuIListComp = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuRechBat = new javax.swing.JMenuItem();
         menuPersonnel = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -485,10 +485,15 @@ public class WinHarbour extends javax.swing.JFrame {
         menuBateaux.setText("Bateaux");
 
         jMenuIListComp.setText("Liste complete");
+        jMenuIListComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuIListCompActionPerformed(evt);
+            }
+        });
         menuBateaux.add(jMenuIListComp);
 
-        jMenuItem4.setText("Rechercher un bateau");
-        menuBateaux.add(jMenuItem4);
+        jMenuRechBat.setText("Rechercher un bateau");
+        menuBateaux.add(jMenuRechBat);
 
         mainMenuBar.add(menuBateaux);
 
@@ -686,6 +691,10 @@ public class WinHarbour extends javax.swing.JFrame {
        lam.setVisible(true);
     }//GEN-LAST:event_jMenuAmmPecheActionPerformed
 
+    private void jMenuIListCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIListCompActionPerformed
+       ListesBateaux win = new ListesBateaux(this, true, listePontons);
+    }//GEN-LAST:event_jMenuIListCompActionPerformed
+
 
 
     /**
@@ -741,9 +750,9 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuAmmPeche;
     private javax.swing.JMenuItem jMenuAmmPlaisance;
     private javax.swing.JMenuItem jMenuIListComp;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuRechBat;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextField jTextFieldBateauRecu;
     private static javax.swing.JTextField jTextFieldConfirm;

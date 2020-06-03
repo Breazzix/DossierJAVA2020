@@ -5,15 +5,18 @@
  */
 package Classes;
 
+import Fenetres.DialogErreur;
+
 /**
  *
  * @author vange
  */
 public class ShipWithoutIdentificationException extends Exception
 {
-    public ShipWithoutIdentificationException(String Mess)
+    public ShipWithoutIdentificationException(java.awt.Frame fen,  String Mess)
     {
         super(Mess);
-      
+        DialogErreur Err = new DialogErreur(fen, "Erreur :-( GRRRR !" ,true, Mess);
+        Err.setVisible(true);
     }
 }

@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import java.util.Date;
+
 /**
  *
  * @author vange
@@ -19,8 +21,8 @@ public class BateauPeche extends Bateau{
 
     private String type;
 
-    public BateauPeche(String pavillon) {
-        super(pavillon);
+    public BateauPeche(String pavillon, Date d) {
+        super(pavillon, d);
     }
     
     public final void setType(String t)
