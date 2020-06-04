@@ -5,11 +5,13 @@
  */
 package Classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vange
  */
-abstract class MoyenDeTransport implements AvecHumains{
+abstract class MoyenDeTransport implements AvecHumains, Serializable{
     private String formeEnergie;
     
     public void setFormeEnergie(String energie)

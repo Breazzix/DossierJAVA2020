@@ -7,6 +7,7 @@ package Fenetres;
 
 import Classes.Bateau;
 import Classes.BateauAmarre;
+import Classes.FichierLog;
 import Classes.Ponton;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +57,8 @@ public class ListesBateaux extends javax.swing.JDialog {
         }
         Collections.sort(listBateaux);
         insertBatDansTab(listBateaux);
+        
+        FichierLog.Writer("ListesBateaux", "Affiche liste bateau");
     }
     
     

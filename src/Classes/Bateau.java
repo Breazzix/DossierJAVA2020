@@ -5,13 +5,14 @@
  */
 package Classes;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author vange
  */
-public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant {
+public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant, Serializable {
     private String nom;
     private String portAttache;
     private int tonnage;
@@ -54,7 +55,7 @@ public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant {
         setPortAttache("");
         setTonnage(0);
         setLongueur(0);
-        setPavillon("");
+        setPavillon(pav);
         setDateArriver(d);
         equipage = new Equipage();
     }

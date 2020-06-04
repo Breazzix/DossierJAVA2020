@@ -5,6 +5,7 @@
  */
 package Classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author ASUS7
  */
-public class Equipage {
+public class Equipage implements Serializable {
     private List<Marin> listMarins;
     private Marin capitaine;
     private Marin second;

@@ -135,6 +135,8 @@ public class DateParam extends javax.swing.JDialog {
         selectedCountry = jComboPays.getSelectedIndex();
         selectedDateFormat = jComboFormatDate.getSelectedIndex();
         selectedTimeFormat = jComboFormatTemps.getSelectedIndex();
+        
+        WinHarbour.ConfigProperty.setDateFormat(String.valueOf(selectedDateFormat), String.valueOf(selectedTimeFormat), String.valueOf(selectedCountry));
 
         // WinHarbour.setDate(jComboFormatDate.getSelectedItem().toString());
         // WinHarbour.setTime(jComboFormatTemps.getSelectedItem().toString());

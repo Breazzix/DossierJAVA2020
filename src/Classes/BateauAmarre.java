@@ -5,11 +5,13 @@
  */
 package Classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ASUS7
  */
-public class BateauAmarre implements Comparable<BateauAmarre> {
+public class BateauAmarre implements Comparable<BateauAmarre>, Serializable {
     private Bateau bateau;
     private String amarrage;
     

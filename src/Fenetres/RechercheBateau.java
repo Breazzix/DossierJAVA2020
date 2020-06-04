@@ -8,6 +8,7 @@ package Fenetres;
 import Classes.Bateau;
 import Classes.BateauAmarre;
 import Classes.Equipage;
+import Classes.FichierLog;
 import Classes.Marin;
 import Classes.Ponton;
 import java.text.DateFormat;
@@ -68,6 +69,8 @@ public class RechercheBateau extends javax.swing.JDialog {
         jLblDate.setText(dateAsString);
         
         AfficheEquip(bat.getEquipage());
+        
+        FichierLog.Writer("RechercheBateau", "Affichage de bateau");
     }
     
     private void AfficheEquip (Equipage equip) {
@@ -84,6 +87,8 @@ public class RechercheBateau extends javax.swing.JDialog {
         }
         
         jListEquipage.setModel(dlm);
+        
+        FichierLog.Writer("RechercheBateau", "Affichage d'equipe");
         
     }
     
@@ -218,6 +223,8 @@ public class RechercheBateau extends javax.swing.JDialog {
         Bateau bat = searchBatAmarre(listesP, nomBat);
         if (bat != null)
             AfficheBateau(bat);
+        
+        FichierLog.Writer("RechercheBateau", "Recherche de bateau");
     }//GEN-LAST:event_jBtnChercherActionPerformed
 
     /**

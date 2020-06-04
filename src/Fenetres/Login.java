@@ -7,6 +7,7 @@ package Fenetres;
 
 import Classes.BaseException;
 import Classes.FichierConfig;
+import Classes.FichierLog;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -211,11 +212,13 @@ public class Login extends javax.swing.JDialog {
              if (isInscrire()) {
             
                 addprop(jTextFieldUserName.getText(), pswd);
+                FichierLog.Writer("login", "Inscription user");
                 this.dispose();
             }
             else
             {
                 loadprop(jTextFieldUserName.getText(), pswd);
+                FichierLog.Writer("login", "login user");
                 this.dispose();
             }
         }

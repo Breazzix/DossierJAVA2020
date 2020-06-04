@@ -8,6 +8,7 @@ package Fenetres;
 import Classes.Bateau;
 import Classes.BateauAmarre;
 import Classes.Equipage;
+import Classes.FichierLog;
 import Classes.Marin;
 import Classes.Ponton;
 import java.util.ArrayList;
@@ -162,6 +163,8 @@ public class RecherchePersonnel extends javax.swing.JDialog {
                 }
             }
         }
+        
+        FichierLog.Writer("RecherchePersonnel", "Recherche d'equipe");
         return null;
     }
     

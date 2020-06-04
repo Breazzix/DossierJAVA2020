@@ -21,12 +21,17 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import network.*;import Classes.FichierConfig;
+import Classes.FichierLog;
+import Classes.SaveBateau;
 import JavaBeans.BoatBean;
 import JavaBeans.BoatListener;
 import JavaBeans.KindOfBoatBean;
 import JavaBeans.NotifyBean;
 import JavaBeans.ThreadRandomGenerator;
 import JavaBeans.UtilisateurNombre;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -46,12 +51,41 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     private static DefaultListModel modelBat = new DefaultListModel();
     private NetworkBasicClient client;
     
+    private static Vector<Bateau>listBatArriver = new Vector<Bateau>();
+    
+    ThreadRandomGenerator threadRandGen; 
+    
     public Applic_Phare() {
         initComponents();
         setIcon();
         
-        ThreadRandomGenerator tdrdg = new ThreadRandomGenerator(this, 1, 500, 5, 2);
-        tdrdg.start();
+       
+        setOpenedDate();
+        
+        openListeBateaux();
+       // System.out.println(WinHarbour.ConfigProperty.getConfig().getProperty("pays"));
+        
+        
+    }
+    
+    
+    private void openListeBateaux() {
+        SaveBateau.readArriver(listBatArriver);
+        
+        for (int i = 0; i < listBatArriver.size(); i++) {
+            modelBat.addElement(listBatArriver.get(i));
+        }
+        jListBateau.setModel(modelBat);
+    }
+    
+    private void setOpenedDate() {
+        Date opDate = new Date();
+        String strOpDate = DateFormat.getDateTimeInstance(
+            WinHarbour.dateFormat[DateParam.selectedDateFormat],
+            WinHarbour.timeFormat[DateParam.selectedTimeFormat],
+            WinHarbour.contries[DateParam.selectedCountry]).format(opDate);
+        
+        jLblOpenedDate.setText(strOpDate);
     }
     
     public final void setIcon()
@@ -66,6 +100,10 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     {
         jListBateau.setModel(modelBat);
         modelBat.addElement(bat);
+        
+        listBatArriver.add(bat);
+        
+        SaveBateau.writeArriver(listBatArriver);
     }
     
     public static void setjTextFieldBateauId(Bateau bat)
@@ -86,11 +124,11 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         jPanel1 = new javax.swing.JPanel();
         jLabelEntre = new javax.swing.JLabel();
         jButtonBatEntre = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBtnDeco = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabelRep = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jBtnDemander = new javax.swing.JButton();
         jTextFieldBateauid = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -99,6 +137,7 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         jLabel1 = new javax.swing.JLabel();
         jButtonConnect = new javax.swing.JButton();
         jLabeImage = new javax.swing.JLabel();
+        jLblOpenedDate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,10 +150,10 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
             }
         });
 
-        jButton3.setText("Se déconnecter du serveur");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jBtnDeco.setText("Se déconnecter du serveur");
+        jBtnDeco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBtnDecoActionPerformed(evt);
             }
         });
 
@@ -124,10 +163,10 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
 
         jLabel3.setText("Réponse de la capitainerie:");
 
-        jButton1.setText("Demander autorisation entrée");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnDemander.setText("Demander autorisation entrée");
+        jBtnDemander.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnDemanderActionPerformed(evt);
             }
         });
 
@@ -161,6 +200,8 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
 
         jLabeImage.setText("image");
 
+        jLblOpenedDate.setText("jLabel4");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,7 +209,7 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(jBtnDemander)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(49, 49, 49)
@@ -182,12 +223,6 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
                         .addGap(55, 55, 55)
                         .addComponent(jLabelEntre, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(57, 57, 57))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,6 +237,17 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addComponent(jBtnDeco))
+                        .addGap(57, 57, 57))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLblOpenedDate)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,14 +263,14 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
                             .addComponent(jLabel1))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonSuivant))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                            .addComponent(jButtonSuivant)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldBateauid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
-                .addComponent(jButton1)
+                .addComponent(jBtnDemander)
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -235,8 +281,10 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
                     .addComponent(jButtonBatEntre)
                     .addComponent(jLabelEntre))
                 .addGap(12, 12, 12)
-                .addComponent(jButton3)
-                .addGap(57, 57, 57))
+                .addComponent(jBtnDeco)
+                .addGap(32, 32, 32)
+                .addComponent(jLblOpenedDate)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,6 +305,11 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         int port = 60001;
         client = new NetworkBasicClient("localhost", port);
         
+        threadRandGen = new ThreadRandomGenerator(this, 1, 500, 5, 2);
+        threadRandGen.start();
+        
+        
+        FichierLog.Writer("Applic_Phare", "Connexion au serveur");
     }//GEN-LAST:event_jButtonConnectActionPerformed
 
     private void jTextFieldBateauidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBateauidActionPerformed
@@ -267,16 +320,20 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         Bateau bateau = (Bateau) modelBat.elementAt(0);
         IdentificationBateau win = new IdentificationBateau(this, true, bateau);
         win.setVisible(true);
+        
+        FichierLog.Writer("Applic_Phare", "Bouton suivant appuyer");
     }//GEN-LAST:event_jButtonSuivantActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnDemanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDemanderActionPerformed
         try {
           Envoyer("demander");  
         } catch (BaseException e) {
             Logger.getLogger(Applic_Phare.class.getName()).log(Level.SEVERE, null, e);
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        FichierLog.Writer("Applic_Phare", "Bouton demander appuyer");
+        
+    }//GEN-LAST:event_jBtnDemanderActionPerformed
 
     private void jButtonBatEntreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatEntreActionPerformed
         try {
@@ -284,12 +341,19 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         } catch (BaseException e) {
             Logger.getLogger(Applic_Phare.class.getName()).log(Level.SEVERE, null, e);
         }
+        
+        modelBat.removeElementAt(0);
+        listBatArriver.removeElementAt(0);
+        
+        SaveBateau.writeArriver(listBatArriver);
+        
+        FichierLog.Writer("Applic_Phare", "Bouton Bateau entre appuyer");
     }//GEN-LAST:event_jButtonBatEntreActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jBtnDecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDecoActionPerformed
         client.setEndSending();
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+        threadRandGen.setEnMarche(false);
+    }//GEN-LAST:event_jBtnDecoActionPerformed
     
     public void Envoyer(String type) throws BaseException
     {
@@ -313,23 +377,25 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
            throw new BaseException(this, "Le client n'est pas connecté au serveur !");
         }
          
+        FichierLog.Writer("Applic_Phare", "Envoyer msg au WinHarbour");
     }
     
     public void demander() {
         Bateau BatTmp = (Bateau) modelBat.elementAt(0);
         String tmp = null;
-        tmp = BatTmp.getNom() + "/" + BatTmp.getPortAttache()+ "/" + BatTmp.getTonnage() + "/" + BatTmp.getLongueur() + "/" + BatTmp.getPavillon() + "/" + BatTmp.getEquipage() + "/";
+        tmp = BatTmp.getNom() + "/"  + BatTmp.getLongueur() + "/" + BatTmp.getPavillon() +  "/";
         if (BatTmp instanceof BateauPlaisance)
             tmp = tmp + "Plaisance" ;
         else
         {
             BateauPeche BatPeche = (BateauPeche) BatTmp;
-            tmp =  tmp + BatPeche.getType() + "Peche";
+            tmp =  tmp + "Peche";
             
         }
         
         tmp = "demander/" + tmp;
         
+        System.out.println("Dans demander -- " + tmp);
         String reponse = client.sendString(tmp);
         jLabelRep.setText(reponse);
     }
@@ -382,9 +448,9 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBtnDeco;
+    private javax.swing.JButton jBtnDemander;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonBatEntre;
     private javax.swing.JButton jButtonConnect;
     private javax.swing.JButton jButtonSuivant;
@@ -394,6 +460,7 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelEntre;
     private javax.swing.JLabel jLabelRep;
+    private javax.swing.JLabel jLblOpenedDate;
     private static javax.swing.JList jListBateau;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -402,7 +469,7 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
 
     @Override
     public String getIdentifiant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getName();
     }
 
     @Override

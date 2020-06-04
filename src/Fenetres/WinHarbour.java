@@ -6,11 +6,13 @@
 package Fenetres;
 
 import Classes.Bateau;
+import Classes.BateauAmarre;
 import Classes.BateauPeche;
 import Classes.BateauPlaisance;
 import Classes.Equipage;
 import Classes.FichierConfig;
 import Classes.Ponton;
+import Classes.SaveBateau;
 import Classes.ShipWithoutIdentificationException;
 import java.awt.Component;
 import java.text.DateFormat;
@@ -39,11 +41,17 @@ public class WinHarbour extends javax.swing.JFrame {
     private Ponton ponton3 = new Ponton(3, 4);
     private Vector<Ponton> listePontons = new Vector();
    
-    private final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
-    private final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
-    private final static int[] timeFormat = {DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.FULL};
+    public final static Locale[] contries = {Locale.FRANCE, Locale.UK, Locale.GERMANY, Locale.ITALY, Locale.US};
+    public final static int[] dateFormat = {DateFormat.SHORT, DateFormat.LONG, DateFormat.FULL};
+    public final static int[] timeFormat = {DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.FULL};
 
     Bateau bateau = new Bateau("Black Pearl", "Caraibes", 30, 50, "Tortuga", new Equipage());
+    
+    private static Vector<BateauAmarre>listBatAmarre = new Vector<BateauAmarre>();
+    
+    private DefaultListModel listModel = new DefaultListModel<>();
+    
+    public static FichierConfig ConfigProperty = new FichierConfig();
 
     /**
      * @return the loggedIn
@@ -57,6 +65,48 @@ public class WinHarbour extends javax.swing.JFrame {
         initComponents();
         
         atStartUp();
+        
+        DateParam.selectedDateFormat =  Integer.parseInt(WinHarbour.ConfigProperty.getConfig().getProperty("dateFormat"));
+        DateParam.selectedTimeFormat = Integer.parseInt(WinHarbour.ConfigProperty.getConfig().getProperty("timeFormat"));
+        DateParam.selectedCountry = Integer.parseInt(WinHarbour.ConfigProperty.getConfig().getProperty("pays"));
+        
+        setOpenedDate();
+        
+        openListeBateaux();
+    }
+    
+    private void openListeBateaux() {
+        SaveBateau.readAmarre(listBatAmarre);
+        
+        for (int i = 0; i < listBatAmarre.size(); i++) {
+            Bateau bat = listBatAmarre.get(i).getBateau();
+            String amarrage = listBatAmarre.get(i).getAmarrage().substring(4);
+            String type;
+            
+            if (bat instanceof BateauPlaisance)
+                type = "Plaisance";
+            else
+                type = "Peche";
+            listModel.addElement(listBatAmarre.get(i) + "--" + type + "--" + bat.getPavillon() + "-->"  + amarrage);
+            
+            int numPonton = listBatAmarre.get(i).getAmarrage().charAt(5) - '0'; 
+            int numCote = listBatAmarre.get(i).getAmarrage().charAt(6) - '0'; 
+            int numEmpl = listBatAmarre.get(i).getAmarrage().charAt(8) - '0'; 
+        
+            listePontons.get(numPonton - 1).getListe(numCote)[numEmpl - 1] = bat;
+            System.out.println(listePontons.get(numPonton - 1).getListe(numCote)[numEmpl - 1]);
+        }
+        listBatEntree.setModel(listModel);
+    }
+    
+    private void setOpenedDate() {
+        Date opDate = new Date();
+        String strOpDate = DateFormat.getDateTimeInstance(
+            dateFormat[DateParam.selectedDateFormat],
+            timeFormat[DateParam.selectedTimeFormat],
+            contries[DateParam.selectedCountry]).format(opDate);
+        
+        jLblOpenedDate.setText(strOpDate);
     }
     
     public static boolean isLoggedIn() {
@@ -148,7 +198,7 @@ public class WinHarbour extends javax.swing.JFrame {
     {
         Date cur_date = new Date();
         String madate = new String();
-        
+                
 
         madate = DateFormat.getDateTimeInstance(
             dateFormat[DateParam.selectedDateFormat],
@@ -157,6 +207,8 @@ public class WinHarbour extends javax.swing.JFrame {
         
         
         return madate;
+        
+        
     }
     
     public static void setmItmCbDate(boolean val)
@@ -170,17 +222,14 @@ public class WinHarbour extends javax.swing.JFrame {
         if (st.nextToken().equals("demander"))
         {
             String nom = st.nextToken();
-            String Port = st.nextToken();
-            int tonnage = Integer.parseInt(st.nextToken());
             int longueur = Integer.parseInt(st.nextToken());
             String pav = st.nextToken();
 
             if ("Plaisance".equals(st.nextToken()))
-                bat = new BateauPlaisance(nom,Port,tonnage,longueur,pav,new Equipage());
+                bat = new BateauPlaisance(nom, "", 0, longueur, pav, new Equipage());
             else
             {
-                String type = st.nextToken();
-                bat = new BateauPeche(nom,Port,type,tonnage,longueur,pav,new Equipage());
+                bat = new BateauPeche(nom, "", "", 0, longueur, pav, new Equipage());
             }
 
 
@@ -243,6 +292,7 @@ public class WinHarbour extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel_DATE = new javax.swing.JLabel();
         jCheckReqAtt = new javax.swing.JCheckBox();
+        jLblOpenedDate = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         menuUtilisateur = new javax.swing.JMenu();
         mItmLogin = new javax.swing.JMenuItem();
@@ -350,6 +400,8 @@ public class WinHarbour extends javax.swing.JFrame {
         jCheckReqAtt.setText("Requête en attente");
         jCheckReqAtt.setEnabled(false);
 
+        jLblOpenedDate.setText("jLabel2");
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -399,6 +451,10 @@ public class WinHarbour extends javax.swing.JFrame {
                                         .addGap(0, 106, Short.MAX_VALUE))
                                     .addComponent(jScrollPane1))))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLblOpenedDate)
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,7 +487,9 @@ public class WinHarbour extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
                     .addComponent(jLabelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jLblOpenedDate)
+                .addContainerGap())
         );
 
         menuUtilisateur.setText("Utilisateur");
@@ -518,6 +576,11 @@ public class WinHarbour extends javax.swing.JFrame {
         menuParametre.add(mItmDateFormat);
 
         mItmLogFile.setText("Fichier log");
+        mItmLogFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItmLogFileActionPerformed(evt);
+            }
+        });
         menuParametre.add(mItmLogFile);
 
         mItmCbDate.setSelected(true);
@@ -622,22 +685,34 @@ public class WinHarbour extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mItmCbDateActionPerformed
 
-    DefaultListModel listModel = new DefaultListModel<>();
+    
     private void btnBateauAmarreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBateauAmarreActionPerformed
         WinBateauAmarre win = new WinBateauAmarre(this, true, bat);
         win.setVisible(true);
-
-        listModel.addElement(bat + jTextFieldConfirm.getText());
-        this.listBatEntree.setModel(listModel);
-
         
+        String empl = jTextFieldConfirm.getText();
+        listModel.addElement(bat + empl);
+        this.listBatEntree.setModel(listModel);
+        
+        BateauAmarre batAm = new BateauAmarre(bat, empl);
+        
+        listBatAmarre.add(batAm);
+        
+        int numPonton = empl.charAt(5) - '0'; 
+        int numCote = empl.charAt(6) - '0'; 
+        int numEmpl = empl.charAt(8) - '0'; 
+        
+       
+        listePontons.get(numPonton - 1).getListe(numCote)[numEmpl - 1] = bat;
+
+        SaveBateau.writeAmarre(listBatAmarre);
 
     }//GEN-LAST:event_btnBateauAmarreActionPerformed
 
     private void btnServeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServeurActionPerformed
         if(isLoggedIn() == true)
         {
-            int port = 60001;
+            int port = Integer.parseInt(WinHarbour.ConfigProperty.getConfig().getProperty("port"));
             serv = new NetworkBasicServer(port, jCheckReqAtt);
         }
     }//GEN-LAST:event_btnServeurActionPerformed
@@ -646,6 +721,7 @@ public class WinHarbour extends javax.swing.JFrame {
         if (jCheckReqAtt.isSelected())
         {
             BateauRecu = serv.getMessage();
+            System.out.println("Dans btnLireActionPerformed -- " + BateauRecu);
             try {
               setBatLu(BateauRecu);  
             } catch (ShipWithoutIdentificationException e) {
@@ -693,7 +769,13 @@ public class WinHarbour extends javax.swing.JFrame {
 
     private void jMenuIListCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIListCompActionPerformed
        ListesBateaux win = new ListesBateaux(this, true, listePontons);
+       win.setVisible(true);
     }//GEN-LAST:event_jMenuIListCompActionPerformed
+
+    private void mItmLogFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItmLogFileActionPerformed
+        LogWindow log = new LogWindow(this, true);
+        log.setVisible(true);
+    }//GEN-LAST:event_mItmLogFileActionPerformed
 
 
 
@@ -747,6 +829,7 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelImage1;
     private static javax.swing.JLabel jLabel_DATE;
+    private javax.swing.JLabel jLblOpenedDate;
     private javax.swing.JMenuItem jMenuAmmPeche;
     private javax.swing.JMenuItem jMenuAmmPlaisance;
     private javax.swing.JMenuItem jMenuIListComp;

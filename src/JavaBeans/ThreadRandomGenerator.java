@@ -29,11 +29,11 @@ public class ThreadRandomGenerator extends java.lang.Thread{
             dr = new Double(borneInferieure +
             Math.random()*(borneSuperieure - borneInferieure));
             nombreProduit = dr.intValue();
-            System.out.println(/*utilisateurThread.getIdentifiant() +*/
+            System.out.println(utilisateurThread.getIdentifiant() +
                     "> nombreProduit = " + nombreProduit);
             if (nombreProduit % multipleDeclenchement == 0)
             {
-                System.out.println(/*utilisateurThread.getIdentifiant() +*/
+                System.out.println(utilisateurThread.getIdentifiant() +
                         "> -------------- !!!!!!! " + nombreProduit + "!!!!");
                 utilisateurThread.traiteNombre(nombreProduit);
             }

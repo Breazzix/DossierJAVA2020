@@ -8,6 +8,7 @@ package Fenetres;
 import Classes.Bateau;
 import Classes.BateauPeche;
 import Classes.BateauPlaisance;
+import Classes.FichierLog;
 import Classes.Ponton;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -90,6 +91,8 @@ public class ListeAmarrages extends javax.swing.JDialog {
             i++;
             enm.nextElement();
         }
+        
+        FichierLog.Writer("ListeAmarrages", "Affiche tab liste pontons");
     }
     
     private void creeTabAffiche(Vector<Ponton> list) {
@@ -111,6 +114,8 @@ public class ListeAmarrages extends javax.swing.JDialog {
                 }
             }
         }
+        
+        FichierLog.Writer("ListeAmarrage", "Affiche tab bateau amarre");
     }
     
     private void insertBatDansTab(Bateau bateau, int emplacement, String ponton) {
@@ -289,7 +294,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
 
     private void jButtonChoisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChoisirActionPerformed
                
-        if (isChoix) {
+        if (!isChoix) {
              if (jLabelEmplacement!=null)
                 WinHarbour.setTextFieldEmplacement("P"+ pontonLibre);
         }

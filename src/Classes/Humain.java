@@ -5,11 +5,13 @@
  */
 package Classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vange
  */
-public class Humain {
+public class Humain implements Serializable {
     private String nom;
     private String prenom;
     private String datenaissance;

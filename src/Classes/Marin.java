@@ -5,9 +5,11 @@
  */
 package Classes;
 
+import java.io.Serializable;
 
 
-public class Marin extends Humain implements AUnIdentifiant{
+
+public class Marin extends Humain implements AUnIdentifiant, Serializable{
     String fonction;
     public final static String[] listeFonction = {"Capitaine", "Second", "Bosco", "Matelot", "Passager"};
     

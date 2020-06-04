@@ -5,6 +5,7 @@
  */
 package JavaBeans;
 
+import Fenetres.WinHarbour;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -20,7 +21,7 @@ public class KindOfBoatBean implements UtilisateurNombre{
     
     public KindOfBoatBean ()
     {
-        tdrdg = new ThreadRandomGenerator(this, 1, 500, 1, 2);
+        tdrdg = new ThreadRandomGenerator(this, 1, 500, 1, Integer.parseInt(WinHarbour.ConfigProperty.getConfig().getProperty("pause")));
         tdrdg.start();
     }
     
@@ -42,19 +43,20 @@ public class KindOfBoatBean implements UtilisateurNombre{
     
     @Override
     public String getIdentifiant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getClass().getName();
     }
 
     @Override
     public void traiteNombre(int n) {
-        if (n%7==0)
-        {
+        int modPeche = Integer.parseInt(WinHarbour.ConfigProperty.getConfig().getProperty("batPeche"));
+        int modPlaissance = Integer.parseInt(WinHarbour.ConfigProperty.getConfig().getProperty("batPlaisance"));
+        
+        if (n % modPlaissance == 0) {
             setInfo("Plaisance");
             tdrdg.setEnMarche(false);
             System.out.println("plaisance trouvé");
         }
-        else if (n%17==0)
-        {
+        else if (n% modPeche == 0) {
             setInfo("Peche");
             tdrdg.setEnMarche(false);
             System.out.println("peche trouvé");

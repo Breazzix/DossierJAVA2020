@@ -14,6 +14,7 @@ import javax.swing.RootPaneContainer;
 import Classes.Bateau;
 import Classes.Equipage;
 import Classes.FichierConfig;
+import Classes.FichierLog;
 import Classes.Marin;
 import javax.swing.ImageIcon;
 
@@ -93,6 +94,8 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         for (Marin m : bateau.getEquipage().getLiMarins()) {
             comboModel.addElement(m);
         }
+        
+        FichierLog.Writer("WinBateauAmarre", "Affichage d'un bateau");
     }
 
     private void setLocation(java.awt.Frame parent) {
@@ -264,6 +267,8 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         for (Marin m : bateau.getEquipage().getLiMarins()) {
             comboModel.addElement(m);
         }
+        
+        FichierLog.Writer("WinBateauAmarre", "Affichage d'equip");
     }//GEN-LAST:event_btnEquipageActionPerformed
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed

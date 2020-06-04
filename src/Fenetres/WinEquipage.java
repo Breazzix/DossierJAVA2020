@@ -14,6 +14,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.RootPaneContainer;
 
 import Classes.Equipage;
+import Classes.FichierLog;
 // import Classes.Marin;
 import Classes.Marin;
 
@@ -300,7 +301,8 @@ public class WinEquipage extends javax.swing.JDialog {
                 equip.getLiMarins().add(m);
             }
         }
-
+        
+        FichierLog.Writer("WinEquipage", "Ajout d'equipage dans bateau");
         this.dispose();
     }//GEN-LAST:event_btnValiderActionPerformed
 

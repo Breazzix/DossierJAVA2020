@@ -112,6 +112,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fichier log"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mItmLogFileActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="mItmCbDate">
               <Properties>
@@ -251,6 +254,11 @@
                       </Group>
                   </Group>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jLblOpenedDate" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -289,7 +297,9 @@
                       </Group>
                       <Component id="jLabelImage1" min="-2" pref="189" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="46" max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <Component id="jLblOpenedDate" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -442,6 +452,11 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Requ&#xea;te en attente"/>
             <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLblOpenedDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jLabel2"/>
           </Properties>
         </Component>
       </SubComponents>

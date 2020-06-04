@@ -8,6 +8,7 @@ package Fenetres;
 import Classes.Bateau;
 import Classes.BateauAmarre;
 import Classes.Equipage;
+import Classes.FichierLog;
 import Classes.Marin;
 import Classes.Ponton;
 import java.text.DateFormat;
@@ -152,6 +153,8 @@ public class RechercheMarin extends javax.swing.JDialog {
                 DateFormat df = new SimpleDateFormat(pattern);
                 String dateAsString = df.format(marin.getDateNaissance());
                 jLblDate.setText(dateAsString);
+                
+                FichierLog.Writer("RechercheBateau", "Affichage d'un marin");
             }
         }
     }//GEN-LAST:event_jBtnChercherActionPerformed
@@ -189,6 +192,8 @@ public class RechercheMarin extends javax.swing.JDialog {
                 }
             }
         }
+        
+        FichierLog.Writer("RechercheMarin", "Recherche d'un marin");
         return null;
     }
     

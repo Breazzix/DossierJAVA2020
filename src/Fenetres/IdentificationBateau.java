@@ -9,6 +9,7 @@ import Classes.Bateau;
 import Classes.BateauPeche;
 import Classes.BateauPlaisance;
 import Classes.FichierConfig;
+import Classes.FichierLog;
 import Classes.SailorWithoutIdentificationException;
 import Classes.ShipWithoutIdentificationException;
 import javax.swing.ImageIcon;
@@ -175,21 +176,26 @@ public class IdentificationBateau extends javax.swing.JDialog {
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOkActionPerformed
         try {
             setNomBat(jTextFieldNomBat.getText());
+            
+            bateau.setLongueur(Integer.parseInt(jTextFieldLongueur.getText()));
+            Applic_Phare.setjTextFieldBateauId(bateau);
         } catch (ShipWithoutIdentificationException e) {
             System.out.println(e.getMessage());
         }
         
         
-              
+             
         
-        bateau.setLongueur(Integer.parseInt(jTextFieldLongueur.getText()));
-        Applic_Phare.setjTextFieldBateauId(bateau);
+        
+        FichierLog.Writer("IdentificationBateau", "Bateau Id modifier");
         this.dispose();
     }//GEN-LAST:event_jButtonOkActionPerformed
 
     void setNomBat (String nom) throws ShipWithoutIdentificationException {
-        if (jTextFieldNomBat.getText() == null && "".equals(jTextFieldNomBat.getText()))
-            throw new ShipWithoutIdentificationException( fenParent, "Le mot de passe est incorrect");
+        if (nom == null && "".equals(nom))
+            throw new ShipWithoutIdentificationException( fenParent, "Nom vide");
+        
+        bateau.setNom(nom);
     }
     
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed

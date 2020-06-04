@@ -1,0 +1,101 @@
+[04/06/2020 12:59:52] : <fichierConfig>Création du fichier Config
+[04/06/2020 13:18:47] : <fichierConfig>Création du fichier Config
+[04/06/2020 13:26:56] : <fichierConfig>Création du fichier Config
+[04/06/2020 13:32:39] : <fichierConfig>Création du fichier Config
+[04/06/2020 14:02:48] : <fichierConfig>Création du fichier Config
+[04/06/2020 14:03:13] : <login>login user
+[04/06/2020 17:10:49] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\batAmarre.data (The system cannot find the file specified)
+[04/06/2020 17:11:05] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\bateauArriver.data (The system cannot find the file specified)
+[04/06/2020 17:11:35] : <login>login user
+[04/06/2020 17:11:45] : <Applic_Phare>Connexion au serveur
+[04/06/2020 17:15:59] : <login>login user
+[04/06/2020 17:45:43] : <login>login user
+[04/06/2020 17:45:55] : <Applic_Phare>Connexion au serveur
+[04/06/2020 17:50:07] : <login>login user
+[04/06/2020 17:50:10] : <Applic_Phare>Connexion au serveur
+[04/06/2020 17:54:57] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\batAmarre.data (The system cannot find the file specified)
+[04/06/2020 17:55:04] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\bateauArriver.data (The system cannot find the file specified)
+[04/06/2020 17:55:36] : <login>login user
+[04/06/2020 17:55:40] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:12:59] : <login>login user
+[04/06/2020 18:13:03] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:13:34] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:13:34] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:16:02] : <login>login user
+[04/06/2020 18:16:08] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:17:37] : <login>login user
+[04/06/2020 18:17:45] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:18:44] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:19:54] : <login>login user
+[04/06/2020 18:20:02] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:20:09] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:20:09] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:20:39] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:20:39] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:25:13] : <login>login user
+[04/06/2020 18:25:18] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:25:33] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:25:33] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:26:27] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:26:27] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:30:21] : <login>login user
+[04/06/2020 18:30:24] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:30:33] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:30:33] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:35:11] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:35:11] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:39:43] : <login>login user
+[04/06/2020 18:39:48] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:39:53] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:39:53] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:42:47] : <login>login user
+[04/06/2020 18:42:52] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:42:58] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:42:58] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:43:12] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 18:43:30] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 18:43:43] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 18:43:56] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:43:56] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:46:35] : <login>login user
+[04/06/2020 18:46:39] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:46:41] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:46:41] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:46:45] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 18:46:57] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:46:57] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:47:16] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:47:16] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 18:49:59] : <login>login user
+[04/06/2020 18:52:32] : <login>login user
+[04/06/2020 18:52:33] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:52:41] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:52:41] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:52:47] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 18:53:07] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:53:07] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:53:20] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:53:20] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 18:56:06] : <login>login user
+[04/06/2020 18:56:23] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:56:34] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:56:34] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:56:38] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 18:56:42] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:56:42] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:56:50] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:56:50] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 18:58:54] : <login>login user
+[04/06/2020 18:58:57] : <Applic_Phare>Connexion au serveur
+[04/06/2020 18:59:01] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 18:59:01] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 18:59:06] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 18:59:09] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:59:09] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 18:59:16] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 18:59:16] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 20:21:38] : <login>login user
+[04/06/2020 20:21:46] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 20:22:56] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 20:26:18] : <login>login user
+[04/06/2020 20:26:20] : <ListeAmarrage>Affiche tab bateau amarre
