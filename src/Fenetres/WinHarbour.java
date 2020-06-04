@@ -16,10 +16,14 @@ import Classes.SaveBateau;
 import Classes.ShipWithoutIdentificationException;
 import java.awt.Component;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -35,7 +39,7 @@ public class WinHarbour extends javax.swing.JFrame {
     private static boolean loggedIn = false;
     private NetworkBasicServer serv;
     private String BateauRecu = new String();
-    private static Bateau bat;
+    private static Bateau unBateau;
     private Ponton ponton1 = new Ponton(1, 4); 
     private Ponton ponton2 = new Ponton(2, 4);
     private Ponton ponton3 = new Ponton(3, 4);
@@ -83,6 +87,8 @@ public class WinHarbour extends javax.swing.JFrame {
             String amarrage = listBatAmarre.get(i).getAmarrage().substring(4);
             String type;
             
+            System.out.println("la port = " + bat.getPortAttache());
+            
             if (bat instanceof BateauPlaisance)
                 type = "Plaisance";
             else
@@ -92,11 +98,13 @@ public class WinHarbour extends javax.swing.JFrame {
             int numPonton = listBatAmarre.get(i).getAmarrage().charAt(5) - '0'; 
             int numCote = listBatAmarre.get(i).getAmarrage().charAt(6) - '0'; 
             int numEmpl = listBatAmarre.get(i).getAmarrage().charAt(8) - '0'; 
+            
+            
         
             listePontons.get(numPonton - 1).getListe(numCote)[numEmpl - 1] = bat;
-            System.out.println(listePontons.get(numPonton - 1).getListe(numCote)[numEmpl - 1]);
         }
         listBatEntree.setModel(listModel);
+       
     }
     
     private void setOpenedDate() {
@@ -217,23 +225,34 @@ public class WinHarbour extends javax.swing.JFrame {
     }
     public static void setBatLu(String n) throws ShipWithoutIdentificationException
     {
-        StringTokenizer st = new StringTokenizer(n, "/");
+        StringTokenizer st = new StringTokenizer(n, "-");
         
         if (st.nextToken().equals("demander"))
         {
             String nom = st.nextToken();
             int longueur = Integer.parseInt(st.nextToken());
             String pav = st.nextToken();
+            String dateAsString = st.nextToken();
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            System.out.println("Date as string = " + dateAsString);
+            Date date = null;
+            try {
+                date = formatter.parse(dateAsString);
+                System.out.println(date);
+            } catch (ParseException ex) {
+                Logger.getLogger(WinHarbour.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
 
             if ("Plaisance".equals(st.nextToken()))
-                bat = new BateauPlaisance(nom, "", 0, longueur, pav, new Equipage());
+                unBateau = new BateauPlaisance(nom, "", 0, longueur, pav, new Equipage(), date);
             else
             {
-                bat = new BateauPeche(nom, "", "", 0, longueur, pav, new Equipage());
+                unBateau = new BateauPeche(nom, "", "", 0, longueur, pav, new Equipage(), date);
             }
 
 
-            jTextFieldBateauRecu.setText(bat.toString2());
+            jTextFieldBateauRecu.setText(unBateau.toString2());
         }
         else
         {
@@ -305,7 +324,7 @@ public class WinHarbour extends javax.swing.JFrame {
         jMenuIListComp = new javax.swing.JMenuItem();
         jMenuRechBat = new javax.swing.JMenuItem();
         menuPersonnel = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuRechercheMarin = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         menuParametre = new javax.swing.JMenu();
         mItmDateFormat = new javax.swing.JMenuItem();
@@ -551,16 +570,31 @@ public class WinHarbour extends javax.swing.JFrame {
         menuBateaux.add(jMenuIListComp);
 
         jMenuRechBat.setText("Rechercher un bateau");
+        jMenuRechBat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRechBatActionPerformed(evt);
+            }
+        });
         menuBateaux.add(jMenuRechBat);
 
         mainMenuBar.add(menuBateaux);
 
         menuPersonnel.setText("Personnel");
 
-        jMenuItem5.setText("Equipage d'un bateau");
-        menuPersonnel.add(jMenuItem5);
+        jMenuRechercheMarin.setText("Equipage d'un bateau");
+        jMenuRechercheMarin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRechercheMarinActionPerformed(evt);
+            }
+        });
+        menuPersonnel.add(jMenuRechercheMarin);
 
         jMenuItem6.setText("Rechercher un marin");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         menuPersonnel.add(jMenuItem6);
 
         mainMenuBar.add(menuPersonnel);
@@ -687,23 +721,31 @@ public class WinHarbour extends javax.swing.JFrame {
 
     
     private void btnBateauAmarreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBateauAmarreActionPerformed
-        WinBateauAmarre win = new WinBateauAmarre(this, true, bat);
+        WinBateauAmarre win = new WinBateauAmarre(this, true, unBateau);
         win.setVisible(true);
         
+        String type;
+        if (unBateau instanceof BateauPlaisance)
+                type = "Plaisance";
+            else
+                type = "Peche";
+        
         String empl = jTextFieldConfirm.getText();
-        listModel.addElement(bat + empl);
+        listModel.addElement(unBateau + "--" + type + "--" + unBateau.getPavillon() + "-->"  + empl);
         this.listBatEntree.setModel(listModel);
         
-        BateauAmarre batAm = new BateauAmarre(bat, empl);
+        BateauAmarre batAm = new BateauAmarre(unBateau, empl);
         
         listBatAmarre.add(batAm);
+        
         
         int numPonton = empl.charAt(5) - '0'; 
         int numCote = empl.charAt(6) - '0'; 
         int numEmpl = empl.charAt(8) - '0'; 
         
        
-        listePontons.get(numPonton - 1).getListe(numCote)[numEmpl - 1] = bat;
+        listePontons.get(numPonton - 1).getListe(numCote)[numEmpl - 1] = unBateau;
+        
 
         SaveBateau.writeAmarre(listBatAmarre);
 
@@ -734,7 +776,7 @@ public class WinHarbour extends javax.swing.JFrame {
         if (!"".equals(jTextFieldBateauRecu.getText()))
         {
             String titre;
-            if (bat instanceof BateauPeche)
+            if (unBateau instanceof BateauPeche)
                    titre = "Peche";
             else
                    titre = "Plaisance";
@@ -776,6 +818,21 @@ public class WinHarbour extends javax.swing.JFrame {
         LogWindow log = new LogWindow(this, true);
         log.setVisible(true);
     }//GEN-LAST:event_mItmLogFileActionPerformed
+
+    private void jMenuRechBatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRechBatActionPerformed
+        RechercheBateau rech = new RechercheBateau(this, true, listePontons);
+        rech.setVisible(true);
+    }//GEN-LAST:event_jMenuRechBatActionPerformed
+
+    private void jMenuRechercheMarinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRechercheMarinActionPerformed
+        RecherchePersonnel rech = new RecherchePersonnel(this, true, listePontons);
+        rech.setVisible(true);
+    }//GEN-LAST:event_jMenuRechercheMarinActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        RechercheMarin rech = new RechercheMarin(this, true, listePontons);
+        rech.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
 
 
@@ -833,9 +890,9 @@ public class WinHarbour extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuAmmPeche;
     private javax.swing.JMenuItem jMenuAmmPlaisance;
     private javax.swing.JMenuItem jMenuIListComp;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuRechBat;
+    private javax.swing.JMenuItem jMenuRechercheMarin;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextField jTextFieldBateauRecu;
     private static javax.swing.JTextField jTextFieldConfirm;

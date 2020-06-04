@@ -47,12 +47,15 @@ public class RechercheBateau extends javax.swing.JDialog {
         int a = 0;
         for (int i = 0; enm.hasMoreElements(); i++) {
             Ponton unPonton = (Ponton) enm.nextElement();
-            for (int j = 0; i < 2; j++) {
+            for (int j = 0; j < 2; j++) {
                 for (int k = 0; k < unPonton.getNombreEmplacements(); k++) {
-                    bat = (Bateau) unPonton.getListe(i + 1)[k];
+                    bat = (Bateau) unPonton.getListe(j + 1)[k];
                     
-                    if (bat.getNom().equals(nomBat))
-                        return bat;
+                    System.out.println("bat = " + bat + "    nomBat = " + nomBat);
+                    
+                    if (bat != null)
+                        if (bat.getNom().equals(nomBat))
+                            return bat;
                 }
             }
         }
@@ -63,9 +66,12 @@ public class RechercheBateau extends javax.swing.JDialog {
         jLblLongueur.setText(String.valueOf(bat.getLongueur()) );
         jLblPavillon.setText(bat.getPavillon());
         
-        String pattern = "MM/dd/yyyy";
+        
+        String pattern = "MM/dd/yyyy HH:mm:ss";
         DateFormat df = new SimpleDateFormat(pattern);
         String dateAsString = df.format(bat.getDateArriver());
+        
+        
         jLblDate.setText(dateAsString);
         
         AfficheEquip(bat.getEquipage());

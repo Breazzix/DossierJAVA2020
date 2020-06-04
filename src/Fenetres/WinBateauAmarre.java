@@ -56,7 +56,9 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         bateau = bat;
 
         jLabelNomBat.setText(bateau.getNom());
-        setIcon();
+        
+         jLabelFlag.setText(bat.getPavillon());
+         jLabelNomBat.setText(bat.getNom());
     }
     
     public final void setIcon()
@@ -95,6 +97,9 @@ public class WinBateauAmarre extends javax.swing.JDialog {
             comboModel.addElement(m);
         }
         
+        
+       
+        
         FichierLog.Writer("WinBateauAmarre", "Affichage d'un bateau");
     }
 
@@ -115,7 +120,7 @@ public class WinBateauAmarre extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLblEmpl = new javax.swing.JLabel();
         jLabelNomBat = new javax.swing.JLabel();
         jLabelFlag = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -136,12 +141,13 @@ public class WinBateauAmarre extends javax.swing.JDialog {
 
         jLabel3.setText("Pavillon : ");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Q2*4");
+        jLblEmpl.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLblEmpl.setText("P11*1");
 
         jLabelNomBat.setText("Marie Hurlante");
 
-        jLabelFlag.setText("Image");
+        jLabelFlag.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelFlag.setText("UK");
 
         jLabel7.setText("Port d'atache : ");
 
@@ -185,19 +191,19 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtf_PortAtache))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabelNomBat)
-                            .addComponent(jLabelFlag, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxEquip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtfTonnage)))
+                        .addComponent(jTxtfTonnage))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFlag, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLblEmpl)
+                            .addComponent(jLabelNomBat))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
@@ -216,16 +222,16 @@ public class WinBateauAmarre extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLblEmpl))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabelNomBat))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabelFlag, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelFlag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTxtf_PortAtache, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,6 +256,10 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+     
+        bateau.setPortAttache(jTxtf_PortAtache.getText());
+
+        bateau.setTonnage(Integer.parseInt(jTxtfTonnage.getText()));
         this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
 
@@ -326,11 +336,11 @@ public class WinBateauAmarre extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelFlag;
     private javax.swing.JLabel jLabelNomBat;
+    private javax.swing.JLabel jLblEmpl;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTxtfTonnage;
     private javax.swing.JTextField jTxtf_PortAtache;

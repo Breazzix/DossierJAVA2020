@@ -99,3 +99,104 @@
 [04/06/2020 20:22:56] : <ListeAmarrage>Affiche tab bateau amarre
 [04/06/2020 20:26:18] : <login>login user
 [04/06/2020 20:26:20] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 20:33:08] : <login>login user
+[04/06/2020 20:33:18] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 20:46:22] : <login>login user
+[04/06/2020 20:46:24] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 20:56:57] : <login>login user
+[04/06/2020 20:57:07] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 20:59:31] : <login>login user
+[04/06/2020 20:59:33] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 21:01:12] : <login>login user
+[04/06/2020 21:01:17] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 21:03:16] : <login>login user
+[04/06/2020 21:03:19] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 21:06:12] : <login>login user
+[04/06/2020 21:06:13] : <ListesBateaux>Affiche liste bateau
+[04/06/2020 21:08:16] : <login>login user
+[04/06/2020 21:35:33] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\batAmarre.data (The system cannot find the file specified)
+[04/06/2020 21:35:45] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\bateauArriver.data (The system cannot find the file specified)
+[04/06/2020 21:35:57] : <login>login user
+[04/06/2020 21:36:09] : <Applic_Phare>Connexion au serveur
+[04/06/2020 21:36:46] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 21:36:46] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 21:36:54] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 21:37:01] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 21:37:01] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 21:37:18] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 21:37:18] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 21:38:20] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 21:38:24] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 21:41:15] : <login>login user
+[04/06/2020 21:44:22] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\bateauArriver.data (The system cannot find the file specified)
+[04/06/2020 21:45:03] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\batAmarre.data (The system cannot find the file specified)
+[04/06/2020 21:45:08] : <SaveBateau>Fichier n'existe pas : C:\Users\ASUS7\Desktop\Java_Labo\DossierJAVA2020\bateauArriver.data (The system cannot find the file specified)
+[04/06/2020 21:45:15] : <login>login user
+[04/06/2020 21:45:22] : <Applic_Phare>Connexion au serveur
+[04/06/2020 21:46:26] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 21:46:26] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 21:46:33] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 21:46:42] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 21:46:42] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 21:46:53] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 21:46:53] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 21:47:26] : <ListeAmarrage>Affiche tab bateau amarre
+[04/06/2020 21:52:51] : <login>login user
+[04/06/2020 21:52:55] : <Applic_Phare>Connexion au serveur
+[04/06/2020 21:53:05] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 21:53:05] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 21:53:09] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 21:53:21] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 21:53:21] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 21:53:32] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 21:53:32] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 22:02:14] : <login>login user
+[04/06/2020 22:05:37] : <login>login user
+[04/06/2020 22:06:53] : <login>login user
+[04/06/2020 22:07:00] : <RechercheBateau>Affichage d'equipe
+[04/06/2020 22:07:00] : <RechercheBateau>Affichage de bateau
+[04/06/2020 22:07:00] : <RechercheBateau>Recherche de bateau
+[04/06/2020 22:07:27] : <ListesBateaux>Affiche liste bateau
+[04/06/2020 22:14:28] : <Applic_Phare>Connexion au serveur
+[04/06/2020 22:14:36] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 22:14:36] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 22:14:42] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 22:14:50] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 22:14:50] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 22:15:13] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 22:15:13] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 22:16:55] : <WinEquipage>Ajout d'equipage dans bateau
+[04/06/2020 22:16:55] : <WinBateauAmarre>Affichage d'equip
+[04/06/2020 22:17:37] : <RechercheBateau>Affichage d'equipe
+[04/06/2020 22:17:37] : <RechercheBateau>Affichage de bateau
+[04/06/2020 22:17:37] : <RechercheBateau>Recherche de bateau
+[04/06/2020 22:21:22] : <login>login user
+[04/06/2020 22:21:27] : <ListesBateaux>Affiche liste bateau
+[04/06/2020 22:21:34] : <ListesBateaux>Affiche liste bateau
+[04/06/2020 22:22:24] : <RechercheBateau>Affichage d'equipe
+[04/06/2020 22:22:24] : <RechercheBateau>Affichage de bateau
+[04/06/2020 22:22:24] : <RechercheBateau>Recherche de bateau
+[04/06/2020 22:23:22] : <login>login user
+[04/06/2020 22:23:30] : <RechercheBateau>Affichage d'equipe
+[04/06/2020 22:23:30] : <RechercheBateau>Affichage de bateau
+[04/06/2020 22:23:30] : <RechercheBateau>Recherche de bateau
+[04/06/2020 22:25:10] : <login>login user
+[04/06/2020 22:27:04] : <login>login user
+[04/06/2020 22:27:16] : <RechercheBateau>Affichage d'un marin
+[04/06/2020 22:29:54] : <login>login user
+[04/06/2020 22:30:34] : <login>login user
+[04/06/2020 22:30:55] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 22:30:55] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 22:31:00] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 22:31:28] : <login>login user
+[04/06/2020 22:31:56] : <Applic_Phare>Connexion au serveur
+[04/06/2020 22:32:05] : <IdentificationBateau>Bateau Id modifier
+[04/06/2020 22:32:05] : <Applic_Phare>Bouton suivant appuyer
+[04/06/2020 22:32:09] : <ListeAmarrages>Affiche tab liste pontons
+[04/06/2020 22:32:17] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 22:32:17] : <Applic_Phare>Bouton demander appuyer
+[04/06/2020 22:32:23] : <Applic_Phare>Envoyer msg au WinHarbour
+[04/06/2020 22:32:23] : <Applic_Phare>Bouton Bateau entre appuyer
+[04/06/2020 22:33:38] : <WinEquipage>Ajout d'equipage dans bateau
+[04/06/2020 22:33:38] : <WinBateauAmarre>Affichage d'equip
+[04/06/2020 22:34:01] : <ListeAmarrage>Affiche tab bateau amarre

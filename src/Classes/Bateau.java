@@ -39,6 +39,16 @@ public class Bateau extends MoyenDeTransportSurEau implements AUnIdentifiant, Se
         setEquipage(equip);
     }
     
+    public Bateau(String name, String port, int tonnes, int lg, String nationalite, Equipage equip, Date date) {
+        setNom(name);
+        setPortAttache(port);
+        setTonnage(tonnes);
+        setLongueur(lg);
+        setPavillon(nationalite);
+        setEquipage(equip);
+        setDateArriver(date);
+    }
+    
 
     /*public Bateau(Bateau b) {
         this.nom = b.getNom();

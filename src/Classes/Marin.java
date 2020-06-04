@@ -51,6 +51,6 @@ public class Marin extends Humain implements AUnIdentifiant, Serializable{
 
     @Override
     public String toString() { 
-        return String.format(this.getFonction() + " " + this.getNom());
+        return String.format(this.getFonction() + " " + this.getNom() + " " + this.getPrenom());
     } 
 }

@@ -42,6 +42,11 @@ public class ListeAmarrages extends javax.swing.JDialog {
         vpt = listePontons;
         typeBat = titre;
         
+        System.out.println("Liste 1 = " +  vpt.get(0).getListe(1)[0]);
+        System.out.println("Liste 11 = " +  vpt.get(0).getListe(1)[1]);
+        System.out.println("Liste 20 = " +  vpt.get(0).getListe(2)[0]);
+        System.out.println("Liste 21= " +  vpt.get(0).getListe(2)[1]);
+        
         
         setTitle("Capitainerie-" +  titre + ": Liste des amarrages");
         
@@ -83,6 +88,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
                 
                 while (j<addPonton.getNombreEmplacements())
                 {
+                    bat = (Bateau) addPonton.getListe(x)[j];
                     insertTab(bat,j+1,"");
                     j++;
                 }
@@ -105,11 +111,12 @@ public class ListeAmarrages extends javax.swing.JDialog {
                 String numPonton = String.valueOf(unPonton.getNumero()) + (j + 1);
                 
                 int k = 0;
-                bat = (Bateau) unPonton.getListe(i + 1)[k];
-                k++;
+                bat = (Bateau) unPonton.getListe(j + 1)[k];
                 insertBatDansTab(bat, k + 1, numPonton);
+                k++;
                 
                 for (; k < unPonton.getNombreEmplacements(); k++) {
+                    bat = (Bateau) unPonton.getListe(j + 1)[k];
                     insertBatDansTab(bat, k + 1, "");
                 }
             }
@@ -119,6 +126,7 @@ public class ListeAmarrages extends javax.swing.JDialog {
     }
     
     private void insertBatDansTab(Bateau bateau, int emplacement, String ponton) {
+        //System.out.println("Bat = " + bateau + " --Empl = " + emplacement + "--Ponton = " + ponton);
         if (bateau != null) {
             if ( isBateauPlaisance(bateau)) {
                 Object[] data = {ponton,emplacement,bateau.getNom(),bateau.getPortAttache()};

@@ -23,6 +23,9 @@ import javax.swing.ImageIcon;
 import network.*;import Classes.FichierConfig;
 import Classes.FichierLog;
 import Classes.SaveBateau;
+import static Fenetres.WinHarbour.contries;
+import static Fenetres.WinHarbour.dateFormat;
+import static Fenetres.WinHarbour.timeFormat;
 import JavaBeans.BoatBean;
 import JavaBeans.BoatListener;
 import JavaBeans.KindOfBoatBean;
@@ -30,6 +33,7 @@ import JavaBeans.NotifyBean;
 import JavaBeans.ThreadRandomGenerator;
 import JavaBeans.UtilisateurNombre;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -383,7 +387,12 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
     public void demander() {
         Bateau BatTmp = (Bateau) modelBat.elementAt(0);
         String tmp = null;
-        tmp = BatTmp.getNom() + "/"  + BatTmp.getLongueur() + "/" + BatTmp.getPavillon() +  "/";
+        
+        String pattern = "MM/dd/yyyy HH:mm:ss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        String dateAsString = df.format(BatTmp.getDateArriver());
+        
+        tmp = BatTmp.getNom() + "-"  + BatTmp.getLongueur() + "-" + BatTmp.getPavillon() +  "-" + dateAsString + "-";
         if (BatTmp instanceof BateauPlaisance)
             tmp = tmp + "Plaisance" ;
         else
@@ -393,7 +402,7 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
             
         }
         
-        tmp = "demander/" + tmp;
+        tmp = "demander-" + tmp;
         
         System.out.println("Dans demander -- " + tmp);
         String reponse = client.sendString(tmp);
@@ -407,7 +416,7 @@ public class Applic_Phare extends javax.swing.JFrame implements UtilisateurNombr
         Bateau BatTmp = (Bateau) modelBat.elementAt(0);
         
         
-        tmp = "entre/" + BatTmp.getNom();
+        tmp = "entre-" + BatTmp.getNom();
        
         String reponse = client.sendString(tmp);
         jLabelEntre.setText(reponse);
